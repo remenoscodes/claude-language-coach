@@ -412,6 +412,42 @@ The following reference tables demonstrate this approach for **pt-BR** speakers.
 | "v" | "b" suave | Flag: ⚠️ "Em espanhol 'v' soa como 'b' suave, diferente do pt" |
 | "d" intervocalic | "d" suave | Flag: softer than Portuguese, almost "dh" |
 
+### Reference: pt-BR → French
+
+| French sound | pt-BR approximation | Notes |
+|--------------|---------------------|-------|
+| "u" /y/ (tu) | "ü" (between "i" and "u") | Flag: ⚠️ "Arredonde os lábios como 'u' mas diga 'i'" |
+| "r" /ʁ/ (rue) | "rr" (garganta) | Flag: French "r" is uvular, similar to carioca "rr" |
+| nasal "an/en" /ɑ̃/ | "ã" (aberto) | Close to Portuguese nasal but more open, no final "n" sound |
+| nasal "on" /ɔ̃/ | "õ" | Very close to Portuguese "õ" |
+| nasal "in/ain" /ɛ̃/ | "ẽ" (aberto) | Flag: no Portuguese equivalent — open nasal "e" |
+| nasal "un" /œ̃/ | "ã" (arredondado) | Flag: rare, merging with "in" in modern French |
+| "j" /ʒ/ (je) | "j" | Same as Portuguese "j" |
+| "ch" /ʃ/ (chat) | "sh" or "x" | Same as Portuguese "x" in "xícara" |
+| "gn" /ɲ/ (montagne) | "nh" | Exact same sound as Portuguese "nh" |
+| "oi" /wa/ (moi) | "uá" | Flag: spelled "oi" but pronounced "wa" |
+| silent final consonants | (silent) | Flag: ⚠️ "Em francês, consoantes finais são geralmente mudas" |
+| liaison | varies | Flag: final consonant sounds ONLY before a vowel |
+
+### Reference: pt-BR → Italian
+
+| Italian sound | pt-BR approximation | Notes |
+|---------------|---------------------|-------|
+| "gl" + i /ʎ/ (figlio) | "lh" | Same as Portuguese "lh" in "filho" |
+| "gn" /ɲ/ (gnocchi) | "nh" | Same as Portuguese "nh" |
+| "z" /ts/ (piazza) | "ts" | Flag: ⚠️ "Como 'ts' em 'pizza', não como 'z' português" |
+| "z" /dz/ (zero) | "dz" | Flag: voiced variant, like English "ds" in "adds" |
+| "c" + e/i /tʃ/ (ciao) | "tch" | Like Portuguese "tch" in "tchau" |
+| "g" + e/i /dʒ/ (gelato) | "dj" | Like English "j" in "job" |
+| "sc" + e/i /ʃ/ (scena) | "sh" or "x" | Same as Portuguese "x" in "xícara" |
+| double consonants | lengthened | Flag: ⚠️ "Consoantes duplas são pronunciadas mais longas — 'anno' ≠ 'ano'" |
+| "r" (single) | "r" (fraco) | Similar to Portuguese intervocalic "r" |
+| "rr" | "rr" (vibrante) | Trilled, like strong Portuguese "rr" |
+| open "e" è /ɛ/ | "é" (aberto) | Like Portuguese "é" in "café" |
+| closed "e" é /e/ | "ê" (fechado) | Like Portuguese "ê" in "você" |
+| open "o" ò /ɔ/ | "ó" (aberto) | Like Portuguese "ó" in "avó" |
+| closed "o" ó /o/ | "ô" (fechado) | Like Portuguese "ô" in "avô" |
+
 ### Pronunciation Traps
 
 Flag sounds that are systematically problematic for the user's `native_language`. Write trap explanations **in the native language** for maximum clarity.
@@ -427,6 +463,20 @@ Flag sounds that are systematically problematic for the user's `native_language`
 - **"b/v" merger**: Both sound like a soft "b". Portuguese speakers must suppress the "v" sound
 - **"s/z" distinction**: In most of Latin America, there is no "z" /θ/ sound. "z" = "s"
 - **Oxytone "-ción"/"-sión"**: Always stressed on last syllable, like Portuguese "-ção"/"-são" but without nasalization
+
+#### Common traps: pt-BR → French
+- **Nasal vowels**: French has 4 nasal vowels (an/en, on, in, un). Portuguese speakers tend to add a nasal "n" consonant at the end — in French the nasalization is pure vowel, no "n" sound
+- **The "u" /y/ sound**: French "u" (tu, rue, vu) has NO Portuguese equivalent. It is NOT "u". Lips rounded like "u", tongue like "i". Most common error for pt-BR speakers
+- **Silent final consonants**: Nearly all final consonants are silent (petit, grand, vous). Portuguese speakers tend to pronounce them. Exception: "c", "r", "f", "l" are often pronounced (CaReFuL rule)
+- **Liaison**: Silent consonants "wake up" before vowels (les amis → "lez-ami"). This is systematic, not optional in many cases
+- **Stress**: French has NO word-level stress — stress falls on the last syllable of a phrase group. Portuguese speakers impose word-level stress patterns
+
+#### Common traps: pt-BR → Italian
+- **Double consonants**: THE critical difference. "anno" (year) vs "ano" (anus), "penna" (pen) vs "pena" (pity/pain). Portuguese has no phonemic consonant length — Italian does. Must physically hold the consonant longer
+- **Open/closed vowels**: Like Portuguese, Italian distinguishes è/é and ò/ó. But the rules differ by word. "Perché" has closed é, "caffè" has open è
+- **"c" and "g" before e/i**: Pronounced as affricates (cena = "tchena", gente = "djente"). Portuguese speakers may use their native "s" and "j" sounds instead
+- **No nasalization**: Italian has zero nasal vowels. Portuguese speakers must suppress nasalization completely (anno ≠ "ãno")
+- **Gemination in context**: Some words double consonants when prefixed (a + basso = abbasso). Missing the double changes meaning or sounds wrong
 
 #### For other native languages
 

@@ -64,6 +64,8 @@ This is the most impactful contribution. Each language needs two template files 
 
 - English: [`english-coaching.md`](plugins/claude-language-coach/skills/lang/templates/english-coaching.md), [`english-coaching.json`](plugins/claude-language-coach/skills/lang/templates/english-coaching.json)
 - Spanish: [`spanish-coaching.md`](plugins/claude-language-coach/skills/lang/templates/spanish-coaching.md), [`spanish-coaching.json`](plugins/claude-language-coach/skills/lang/templates/spanish-coaching.json)
+- French: [`french-coaching.md`](plugins/claude-language-coach/skills/lang/templates/french-coaching.md), [`french-coaching.json`](plugins/claude-language-coach/skills/lang/templates/french-coaching.json)
+- Italian: [`italian-coaching.md`](plugins/claude-language-coach/skills/lang/templates/italian-coaching.md), [`italian-coaching.json`](plugins/claude-language-coach/skills/lang/templates/italian-coaching.json)
 
 ## Commit conventions
 

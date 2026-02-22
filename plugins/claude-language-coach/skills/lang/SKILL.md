@@ -1,7 +1,7 @@
 ---
 name: lang
 description: Full language coaching review for the current session
-argument-hint: "[en|es|all]"
+argument-hint: "[en|es|fr|it|all]"
 disable-model-invocation: true
 ---
 
@@ -114,6 +114,70 @@ What persists? New patterns discovered?]
 
 ## Register & Formality
 [tu vs usted, voseo awareness if relevant]
+
+## Progress Notes
+[Compare with known patterns from memory file]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+## Review Format for French (`fr`)
+
+```
+🇫🇷 Français — Session Review
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## Grammar Patterns
+[Articles & gender, partitive, verb conjugation, subjunctive triggers]
+
+## Gender
+[Noun gender errors, adjective agreement — le/la confusion]
+
+## False Friends (native → fr)
+[Native-French false cognates detected in context]
+[Critical for pt-BR: attendre/atender, entretenir/entreter, assister/assistir]
+
+## Vocabulary
+[Words used correctly — reinforce. Suggest alternatives.]
+
+## Pronunciation
+[For vocabulary terms taught this session, show 🔊 native_language approximations]
+[Flag: liaison rules, nasal vowels, silent final consonants]
+
+## Prepositions
+[à/de/en/dans patterns, country prepositions (en/au/aux)]
+
+## Progress Notes
+[Compare with known patterns from memory file]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+## Review Format for Italian (`it`)
+
+```
+🇮🇹 Italiano — Session Review
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## Grammar Patterns
+[Articles (il/lo/la/i/gli/le), auxiliary choice (essere vs avere), verb conjugation]
+
+## Spelling & Double Consonants
+[Double consonant errors — critical in Italian: anno/ano, penna/pena]
+[Accent placement: è vs é]
+
+## False Friends (native → it)
+[Native-Italian false cognates detected in context]
+[CRITICAL for pt-BR: extremely high mutual intelligibility = frequent traps]
+[e.g., esperto, caldo, burro, camera, guardare, salire]
+
+## Vocabulary
+[Words used correctly — reinforce. Suggest alternatives.]
+
+## Pronunciation
+[For vocabulary terms taught this session, show 🔊 native_language approximations]
+[Flag: double consonant length, open/closed vowels, gl/gn sounds]
+
+## Verb Conjugation
+[Passato prossimo vs imperfetto, congiuntivo, irregular verbs]
 
 ## Progress Notes
 [Compare with known patterns from memory file]

@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-02-22
+
+### Added
+- **French language template**: JSON + Markdown coaching memory templates with French-specific sections (gender, verb conjugation, prepositions, liaison/nasal vowel pronunciation notes)
+- **Italian language template**: JSON + Markdown coaching memory templates with Italian-specific sections (double consonants, gender, essere/avere auxiliary, congiuntivo, open/closed vowels)
+- **French review format**: session review block in `/lang` skill with grammar, gender, false friends, pronunciation, prepositions sections
+- **Italian review format**: session review block in `/lang` skill with grammar, spelling & double consonants, false friends, pronunciation, verb conjugation sections
+- **Pronunciation reference tables**: pt-BR → French (12 sound mappings) and pt-BR → Italian (14 sound mappings) in `language-coaching` skill
+- **Pronunciation traps**: pt-BR → French (nasal vowels, "u" /y/, silent finals, liaison, stress) and pt-BR → Italian (double consonants, open/closed vowels, affricates, no nasalization, gemination)
+- Keywords `french` and `italian` added to plugin.json
+
 ## [1.4.0] - 2026-02-22
 
 ### Added
