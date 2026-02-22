@@ -99,7 +99,12 @@ Active Teaching:
 📝 {Grammar note}
 `─────────────────────────────────────────────────`
 
-Flags: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語
+SRS Review (lighter, only when no correction/teaching fires):
+`{flag} {Language} review ─────────────────────────────`
+💭 **{correct form}** — last corrected {date}. Recall: {explanation}
+`─────────────────────────────────────────────────`
+
+Flags: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語, 🇰🇷 한국어
 
 ## Trigger Rules
 - Correct when: recurring grammar pattern, code-switching, false friend, more idiomatic phrasing
@@ -107,6 +112,8 @@ Flags: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch
 - Teach when: technical term worth learning, false friend trap, term not already taught this session
 - Max 1 active teaching block per response
 - Missing apostrophes ("im", "dont"), lowercase proper nouns ("english") ARE correctable, not typos
+- Priority: correction > teaching > SRS review. SRS review ONLY fires when no other coaching block present
+- If a pattern's `next_review` date has passed, fire an SRS review block (max 1/response)
 
 ## Memory Protocol
 - Read: `~/.claude/coaching/{lang}-coaching.json` (patterns, vocabulary, stats)
@@ -114,7 +121,13 @@ Flags: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch
 - After teaching: add/update vocabulary entry with `times_shown`, `last_shown`, `pronunciation`
 - After any update: regenerate `~/.claude/coaching/{lang}-coaching.md` from JSON
 - Patterns only persisted after 2+ sightings (skip first-time one-offs)
+- After any coaching interaction: upsert session entry for today in `sessions` array (merge by date). Update `stats.total_sessions` and `stats.last_session`
 - For detailed schemas, invoke the `language-coaching` skill
+
+## SRS Protocol
+- On correction: set `next_review` = tomorrow, `interval_days` = 1, `ease_factor` = 2.5 (first) or max(1.3, ease - 0.2) (re-error)
+- On correct usage: `interval_days` = ceil(interval × ease_factor), `next_review` = today + interval
+- Resolution: `interval_days >= 21` AND `times_correct_since_last_error >= 5` → resolved, clear SRS fields
 
 ## Key Principles
 1. Task first — never delay or obscure the technical answer
@@ -196,6 +209,8 @@ Active since: {active_since}
 ## False Friends Log
 
 ## Resolved Patterns
+
+## SRS Schedule
 
 ## Vocabulary Acquired in Context
 
