@@ -85,11 +85,111 @@ A coaching block SHOULD NOT appear when:
 - They come **after** any other supplementary blocks if both are present
 - Never let coaching interrupt the flow of a technical answer
 
-## Memory Tracking
+## Memory: Read and Write Protocol
 
-Coaching memory files are stored globally at `~/.claude/coaching/` so that language progress persists across all projects. Each language has its own file (e.g., `~/.claude/coaching/english-coaching.md`, `~/.claude/coaching/spanish-coaching.md`).
+Coaching memory uses TWO companion files per language at `~/.claude/coaching/`:
+- `{language}-coaching.json` — **source of truth** (structured, machine-readable)
+- `{language}-coaching.md` — **human-readable rendering** (regenerated from JSON)
 
-If these files exist, consult them for known patterns and update them when new recurring patterns are confirmed (seen 2+ times across sessions).
+### On Activation (reading memory)
+
+1. **Read** `~/.claude/coaching/{language}-coaching.json` using the Read tool
+2. If the JSON file does not exist but the `.md` file does, proceed without structured memory for this session (do NOT attempt migration during ambient coaching — that is the `lang` or `setup` skill's job)
+3. If neither file exists, proceed without memory (suggest running the `setup` skill on the first coaching block)
+4. From the JSON, note:
+   - All patterns where `resolved` is false (active patterns to watch for)
+   - The `times_corrected` count (high counts = persistent patterns, prioritize these)
+
+### On Correction (writing memory)
+
+After generating a coaching block, update the JSON file:
+
+1. **Read** the current JSON file (re-read to avoid stale data)
+2. **Find or create** the pattern:
+   - Derive the pattern ID as `{type}-{kebab-case-2-4-word-description}` (e.g., `grammar-didnt-plus-past`, `false_friend-atualmente`, `spelling-augumentar`)
+   - Search existing patterns by `id`
+   - If found: increment `times_corrected`, update `last_seen` to today, add to `examples` array (max 5, drop oldest if full)
+   - If NOT found AND this is the first sighting ever: do NOT create a pattern entry yet. Patterns are only persisted after 2+ sightings.
+   - If NOT found AND you have seen this in a previous session (check the `.md` file or your own memory of this session): create a new pattern entry with `times_corrected: 1`, `first_seen` and `last_seen` set to today, `resolved: false`, all SRS fields set to null
+3. Update the `stats` object: recalculate `patterns_active` and `total_corrections`
+4. **Write** the updated JSON back using the Write tool
+5. **Regenerate** the markdown file from the JSON (see Markdown Regeneration below)
+
+### On Correct Usage (positive tracking)
+
+If you notice the user correctly using a construction that matches an active (non-resolved) pattern:
+1. Update the pattern: increment `times_correct_since_last_error`, set `last_correct_usage` to today
+2. If `times_correct_since_last_error` >= 5 AND more than 14 days since `last_seen`: set `resolved` to true, increment `stats.patterns_resolved`, decrement `stats.patterns_active`
+3. Write the updated JSON and regenerate the markdown
+
+### Pattern ID Rules
+
+- Format: `{type}-{kebab-case}` where type is one of: `grammar`, `spelling`, `interference`, `false_friend`, `word_choice`, `preposition`, `register`
+- The kebab-case part is 2-4 words describing the core error
+- Always lowercase, hyphens between words, underscores only in multi-word type prefixes (`false_friend`)
+- Examples: `grammar-didnt-plus-past`, `spelling-augumentar`, `false_friend-atualmente`, `preposition-in-vs-on-dates`
+
+### Markdown Regeneration
+
+After any JSON update, regenerate `{language}-coaching.md` with this structure:
+
+```
+# {Language} Coaching — {user_name or "User"}
+
+Native language: {native_language}
+Level: {level}
+Active since: {active_since}
+
+## Recurring Patterns
+
+### Grammar
+{For each pattern where type=grammar and resolved=false:}
+- **{native_form}** → {target_correction} ({times_corrected}x since {first_seen})
+  {explanation}
+
+### Spelling
+{Same format for type=spelling}
+
+### Native Language Interference
+{Same format for type=interference}
+
+### Word Choice
+{Same format for type=word_choice}
+
+### Prepositions
+{Same format for type=preposition}
+
+### Register
+{Same format for type=register}
+
+## False Friends Log
+{For each pattern where type=false_friend:}
+- **{native_form}** ≠ **{target_correction}** ({times_corrected}x)
+  {explanation}
+
+## Resolved Patterns
+{For each pattern where resolved=true:}
+- ~~{native_form}~~ — resolved {last_correct_usage} (was corrected {times_corrected}x)
+
+## Vocabulary Acquired in Context
+{For each vocabulary entry:}
+- **{term}** — {context} ({times_used}x, since {first_used})
+
+## Session History
+{For each session, newest first:}
+### {date} ({project or "general"})
+- Patterns corrected: {patterns_addressed count}
+- New patterns: {new_patterns count}
+- Correct usages: {patterns_correct count}
+- {notes}
+
+## Stats
+- Sessions: {total_sessions}
+- Active patterns: {patterns_active}
+- Resolved patterns: {patterns_resolved}
+- Vocabulary: {vocabulary_size} terms
+- Total corrections: {total_corrections}
+```
 
 ## Key Principles
 

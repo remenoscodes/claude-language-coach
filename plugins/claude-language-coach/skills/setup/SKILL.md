@@ -49,22 +49,48 @@ languages:
 
 If a `# Language Coaching Config` section already exists, update it instead of duplicating.
 
-### 5. Create memory files (optional)
+### 5. Create memory files
 
-Ask if the user wants progress tracking across sessions. If yes, create the coaching memory file(s) in a global directory so progress persists across all projects.
+Ask if the user wants progress tracking across sessions. If yes, create coaching memory files in a global directory so progress persists across all projects.
 
-The memory file path follows: `~/.claude/coaching/{language}-coaching.md`
-
+The memory directory is: `~/.claude/coaching/`
 Create the directory if it doesn't exist: `mkdir -p ~/.claude/coaching`
 
-Create the file with this structure for **English**:
+For each target language, create **TWO companion files**:
+
+#### JSON file (source of truth): `~/.claude/coaching/{language}-coaching.json`
+
+```json
+{
+  "version": 1,
+  "language": "{lang_code}",
+  "native_language": "{native_language}",
+  "level": "{level}",
+  "active_since": "{today's date, YYYY-MM-DD}",
+  "patterns": [],
+  "vocabulary": [],
+  "sessions": [],
+  "stats": {
+    "total_sessions": 0,
+    "total_corrections": 0,
+    "patterns_resolved": 0,
+    "patterns_active": 0,
+    "vocabulary_size": 0,
+    "last_session": null
+  }
+}
+```
+
+#### Markdown file (human-readable): `~/.claude/coaching/{language}-coaching.md`
+
+Generate the initial markdown from the JSON with this structure:
 
 ```markdown
-# English Coaching — {User Name}
+# {Language} Coaching — {User Name}
 
 Native language: {native_language}
 Level: {level}
-Active since: {today's date}
+Active since: {active_since}
 
 ## Recurring Patterns
 
@@ -73,36 +99,33 @@ Active since: {today's date}
 ### Native Language Interference
 ### Word Choice
 ### Prepositions
-
-## Vocabulary Acquired in Context
-## False Friends Log
-## Session History
-```
-
-For **Spanish**, use this structure:
-
-```markdown
-# Spanish Coaching — {User Name}
-
-Native language: {native_language}
-Level: {level}
-Active since: {today's date}
-
-## Recurring Patterns
-
-### Grammar
-### Spelling
-### Native Language Interference
 ### Register
 
 ## False Friends Log
+
+## Resolved Patterns
+
 ## Vocabulary Acquired in Context
+
 ## Session History
+
+## Stats
+- Sessions: 0
+- Active patterns: 0
+- Resolved patterns: 0
+- Vocabulary: 0 terms
+- Total corrections: 0
 ```
 
-For **other languages**, follow the English structure but adapt sections to the language's specific challenges (e.g., add "Kanji" for Japanese, "Cases" for German, "Gender" for French).
+For **Spanish**, adapt sections (add Register prominently, note that False Friends are critical for pt-BR↔es).
+For **other languages**, adapt to the language's specific challenges (e.g., add "Kanji" for Japanese, "Cases" for German, "Gender" for French).
 
 Fill in all placeholders with the user's actual data.
+
+#### If memory files already exist
+
+- If `.md` exists but no `.json`: offer to migrate. Read the markdown, extract patterns/vocabulary/sessions into JSON structure, create the JSON file, then regenerate the markdown from the JSON to normalize the format. Tell the user: "Migrated your existing coaching data to structured format."
+- If both files already exist: tell the user memory is already configured and offer to reset (with confirmation).
 
 ### 6. Confirm
 
