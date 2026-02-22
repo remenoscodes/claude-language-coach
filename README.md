@@ -4,11 +4,15 @@ Ambient language coaching for [Claude Code](https://code.claude.com). Learn lang
 
 ## How it works
 
-This plugin adds two skills to Claude Code:
+Install the plugin and start coding. The plugin auto-detects when you're writing in a non-native language and provides lightweight coaching at the end of responses. No configuration required.
 
-1. **`language-coaching`** (background) — Claude automatically detects when you write in a non-native language and provides lightweight feedback at the end of responses. No interruption to your work.
+### Skills
 
-2. **`/claude-language-coach:lang`** (on-demand) — Run a full session review of your language usage at any time.
+| Skill | Type | Description |
+|-------|------|-------------|
+| `language-coaching` | Background | Auto-detects non-native writing, appends coaching blocks |
+| `/claude-language-coach:lang` | On-demand | Full session review of your language usage |
+| `/claude-language-coach:setup` | On-demand | Interactive setup to customize your preferences |
 
 ### Example
 
@@ -36,14 +40,20 @@ Claude answers your question normally, then appends:
 /plugin install claude-language-coach
 ```
 
-After installation, skills are namespaced:
+That's it. The plugin works immediately with smart defaults:
+- Auto-detects your native language from writing patterns
+- Coaches at `normal` intensity (~1 correction per 3-5 messages)
+- Supports any language pair
 
-| Skill | Invocation |
-|-------|------------|
-| Session review | `/claude-language-coach:lang en` |
-| Session review (Spanish) | `/claude-language-coach:lang es` |
-| Session review (all) | `/claude-language-coach:lang all` |
-| Ambient coaching | Automatic (no invocation needed) |
+### Customize (optional)
+
+Run the interactive setup to fine-tune your preferences:
+
+```
+/claude-language-coach:setup
+```
+
+This guides you through choosing your native language, target languages, intensity levels, and sets up progress tracking.
 
 ### Manual (standalone)
 
@@ -54,7 +64,7 @@ git clone https://github.com/remenoscodes/claude-language-coach.git
 cp -r claude-language-coach/skills/* ~/.claude/skills/
 ```
 
-With manual installation, skills use short names (`/lang en` instead of `/claude-language-coach:lang en`).
+With manual installation, skills use short names (`/lang`, `/setup` instead of `/claude-language-coach:lang`, `/claude-language-coach:setup`).
 
 ### Local development
 
@@ -64,20 +74,40 @@ Test the plugin without installing:
 claude --plugin-dir ./claude-language-coach
 ```
 
+### Skills reference (plugin install)
+
+| Action | Command |
+|--------|---------|
+| Session review (English) | `/claude-language-coach:lang en` |
+| Session review (Spanish) | `/claude-language-coach:lang es` |
+| Session review (all) | `/claude-language-coach:lang all` |
+| Customize preferences | `/claude-language-coach:setup` |
+| Ambient coaching | Automatic (no command needed) |
+
 ## Configuration
 
-Add a language coaching config section to your CLAUDE.md (`~/.claude/CLAUDE.md` for global, or `.claude/CLAUDE.md` for project-specific):
+### Zero-config (default)
+
+The plugin works out of the box. It auto-detects non-native patterns and coaches at `normal` intensity.
+
+### Manual config (optional)
+
+For precise control, add a config section to your CLAUDE.md (`~/.claude/CLAUDE.md` for global, or `.claude/CLAUDE.md` for project-specific):
 
 ```markdown
 # Language Coaching Config
+
 native_language: pt-BR
 languages:
   - code: en
     level: advanced
     intensity: normal
+  - code: es
+    level: beginner
+    intensity: intensive
 ```
 
-Without this config section, coaching is **disabled**. The plugin requires explicit opt-in.
+Or run `/claude-language-coach:setup` to create this interactively.
 
 ### Supported options
 
@@ -91,76 +121,33 @@ Without this config section, coaching is **disabled**. The plugin requires expli
 ### Intensity levels
 
 - **`quiet`** — Only flags errors that cause ambiguity. ~1 correction per 10 messages.
-- **`normal`** — Grammar patterns, idioms, false friends. ~1 per 3-5 messages. Skips obvious typos.
+- **`normal`** (default) — Grammar patterns, idioms, false friends. ~1 per 3-5 messages. Skips obvious typos.
 - **`intensive`** — Feedback on nearly every message. Vocabulary, register, all patterns.
 
 ## Progress tracking
 
-The plugin tracks your patterns over time using memory files. Create a coaching file in your Claude project memory directory:
-
-**English:**
+The plugin can track your patterns over time using memory files. Run `/claude-language-coach:setup` to set this up automatically, or create the files manually:
 
 ```bash
 mkdir -p ~/.claude/projects/<your-project>/memory
-cat > ~/.claude/projects/<your-project>/memory/english-coaching.md << 'EOF'
-# English Coaching
-
-Native language: pt-BR
-Level: advanced
-Active since: 2026-01-01
-
-## Recurring Patterns
-
-### Grammar
-### Spelling
-### Native Language Interference
-### Word Choice
-### Prepositions
-
-## Vocabulary Acquired in Context
-## False Friends Log
-## Session History
-EOF
 ```
 
-**Spanish:**
+Templates are available in the repo at [`skills/lang/templates/`](skills/lang/templates/).
 
-```bash
-cat > ~/.claude/projects/<your-project>/memory/spanish-coaching.md << 'EOF'
-# Spanish Coaching
-
-Native language: pt-BR
-Level: beginner
-Active since: 2026-01-01
-
-## Recurring Patterns
-
-### Grammar
-### Spelling
-### Native Language Interference
-### Register
-
-## False Friends Log
-## Vocabulary Acquired in Context
-## Session History
-EOF
-```
-
-Fuller templates with comments are available in the repo at [`skills/lang/templates/`](skills/lang/templates/).
-
-## Adding a new language
-
-1. Add the language entry to your CLAUDE.md config section
-2. Create the coaching memory file (use the templates above as a starting point)
-3. The coaching system picks it up immediately
+The plugin reads and updates these files across sessions, tracking:
+- Recurring grammar patterns
+- Native language interference
+- False friends encountered in context
+- Vocabulary acquired through work sessions
 
 ## Design principles
 
 1. **Task first** — You're here to code, not to take a language class
-2. **Pattern over incident** — Recurring mistakes get flagged, one-off typos don't
-3. **Explain the why** — Brief explanations help you learn the rule, not just the fix
-4. **Celebrate progress** — When a recurring error stops appearing, the system notes it
-5. **Cross-language awareness** — Especially alert to false friends between similar languages (e.g., Portuguese ↔ Spanish)
+2. **Zero friction** — Works immediately after install, no config required
+3. **Pattern over incident** — Recurring mistakes get flagged, one-off typos don't
+4. **Explain the why** — Brief explanations help you learn the rule, not just the fix
+5. **Celebrate progress** — When a recurring error stops appearing, the system notes it
+6. **Cross-language awareness** — Especially alert to false friends between similar languages (e.g., Portuguese ↔ Spanish)
 
 ## Contributing
 
