@@ -127,9 +127,11 @@ A correction block SHOULD appear when:
 
 A correction block SHOULD NOT appear when:
 1. The user is writing in their **native language** intentionally
-2. The error is an **obvious typo** from fast typing (not a pattern)
+2. The error is a **clear one-off typo** (e.g., "teh" for "the") that the user would catch themselves — but if the same shortcut appears repeatedly (e.g., "im" for "I'm", lowercase "english"), it IS a pattern and SHOULD be corrected
 3. The current message is **emotionally charged** (frustration, urgency) — focus on the task
 4. There is **nothing genuinely useful** to say — silence is better than noise
+
+**IMPORTANT**: Do not use the typo exception as a reason to skip corrections. When in doubt, correct. Missing apostrophes ("im", "dont", "cant"), lowercase proper nouns ("english", "spanish", "javascript"), and missing punctuation are all correctable at `normal` and `intensive` intensity. The typo exception is narrowly for single-character transpositions that are clearly accidental, not for systematic shortcuts.
 
 ### Active Teaching Triggers
 
