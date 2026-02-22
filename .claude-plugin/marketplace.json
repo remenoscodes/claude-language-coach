@@ -1,5 +1,8 @@
 {
   "name": "claude-language-coach",
+  "metadata": {
+    "description": "Ambient language coaching plugin for Claude Code"
+  },
   "owner": {
     "name": "Emerson Soares",
     "url": "https://github.com/remenoscodes"
@@ -8,7 +11,11 @@
     {
       "name": "claude-language-coach",
       "description": "Ambient language coaching during coding sessions. Learn languages through your daily work with contextual grammar corrections, vocabulary suggestions, and false friend alerts.",
-      "source": "."
+      "source": {
+        "source": "github",
+        "repo": "remenoscodes/claude-language-coach"
+      },
+      "homepage": "https://github.com/remenoscodes/claude-language-coach"
     }
   ]
 }
