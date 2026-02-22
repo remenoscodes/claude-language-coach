@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2026-02-22
+
+### Fixed
+- Typo exception was too broad, causing Claude to skip corrections for missing apostrophes ("im") and lowercase language names ("english")
+- Coaching block delimiters now enforce spacing between flag emoji and language name
+- Removed invalid `category` and `tags` fields from plugin.json that caused manifest validation error
+
+### Changed
+- Coaching blocks now use framed card format with backtick-wrapped delimiters for clear visual separation
+- Active teaching blocks are more compact: term + pronunciation on one line, false friend merged into note line
+- Added README badges, GitHub issue/PR templates, CI validation workflow, and CONTRIBUTING.md
+
 ## [1.3.0] - 2026-02-22
 
 ### Added
