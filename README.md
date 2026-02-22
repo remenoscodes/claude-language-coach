@@ -1,6 +1,10 @@
 # claude-language-coach
 
-Ambient language coaching for [Claude Code](https://code.claude.com). Learn languages through your daily coding sessions with contextual grammar corrections, vocabulary suggestions, and false friend alerts.
+[![Version](https://img.shields.io/github/v/release/remenoscodes/claude-language-coach?label=version)](https://github.com/remenoscodes/claude-language-coach/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-plugin-7C3AED)](https://code.claude.com)
+
+Ambient language coaching for [Claude Code](https://code.claude.com). Learn languages through your daily coding sessions with contextual grammar corrections, vocabulary suggestions, false friend alerts, and pronunciation guidance.
 
 ## How it works
 
