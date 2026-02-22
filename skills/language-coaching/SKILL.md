@@ -98,7 +98,7 @@ If there is a false friend trap, append it to the 📝 line: `📝 {note} · ⚠
 
 The ⚠️ false friend warning is ONLY included when there is an actual false friend trap for the native→target language pair. Do not force it.
 
-Flag mapping: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語
+Flag mapping: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語, 🇰🇷 한국어, 🇳🇱 Nederlands
 
 ## Intensity Levels
 
@@ -605,6 +605,24 @@ The following reference tables demonstrate this approach for **pt-BR** speakers.
 | ㄹ (final) /l/ | "l" | Flag: at end of syllable, sounds like "l" |
 | ㅎ /h/ | "r" (aspirado) | Softer than English "h", similar to weak Portuguese "r" |
 
+### Reference: pt-BR → Dutch
+
+| Dutch sound | pt-BR approximation | Notes |
+|-------------|---------------------|-------|
+| "g" /ɣ/ (goed) | "rr" (garganta) | Flag: ⚠️ "Som gutural, como o 'rr' carioca mas mais forte e contínuo" |
+| "ch" /x/ (lachen) | "rr" (forte) | Same guttural as "g" but voiceless — similar to German "ach" |
+| "sch" /sx/ (school) | "s" + "rr" | Two sounds: "s" followed by the guttural "ch" |
+| "ui" /œy/ (huis) | "ói" (arredondado) | Flag: ⚠️ "Como 'ói' mas com lábios arredondados — não existe em português" |
+| "eu" /øː/ (neus) | "ê" (arredondado) | Flag: ⚠️ "Diga 'ê' com os lábios arredondados como 'ô'" — same as German "ö" |
+| "oe" /u/ (boek) | "u" | Like Portuguese "u" — spelled "oe" but sounds like "u" |
+| "ij/ei" /ɛi/ (wijn, trein) | "ai" (aberto) | Flag: both spellings sound the same, like Portuguese "ai" but more open |
+| "aa" /aː/ (maan) | "a" (longo) | Long "a" — hold the sound |
+| "uu" /yː/ (muur) | "ü" (longo) | Flag: ⚠️ "Arredonde os lábios como 'u' mas diga 'i'" — same as French/German "ü" |
+| "w" /ʋ/ (water) | "v" (suave) | Flag: between "v" and "u" — softer than Portuguese "v" |
+| "r" varies (rood) | "r" (varia) | Flag: uvular in Randstad (like French), rolled in south — context-dependent |
+| "j" /j/ (jaar) | "i" (semivogal) | Like Portuguese "i" in "pai" |
+| schwa /ə/ (de, lopen) | "â" (neutro) | Very common in Dutch — unstressed syllables reduce to schwa |
+
 ### Pronunciation Traps
 
 Flag sounds that are systematically problematic for the user's `native_language`. Write trap explanations **in the native language** for maximum clarity.
@@ -655,6 +673,14 @@ Flag sounds that are systematically problematic for the user's `native_language`
 - **ㅡ (eu)**: This unrounded back vowel does not exist in Portuguese. Say "u" but spread your lips flat instead of rounding
 - **받침 (final consonants)**: Korean final consonants are unreleased — the mouth closes but no air comes out. Portuguese speakers release them or add a vowel after
 - **Consonant assimilation**: When 받침 meets the next syllable, sounds change: ㄱ + ㄴ → "ngn", ㅂ + ㄹ → "mn". These rules are systematic and must be learned
+
+#### Common traps: pt-BR → Dutch
+- **Guttural "g" and "ch"**: THE defining Dutch sound. Both are pronounced deep in the throat. Portuguese speakers tend to substitute their native "g" (like in "gato") — but Dutch "g" is ALWAYS guttural, never a stop consonant. Similar to carioca "rr" but sustained
+- **"ui" diphthong**: The Dutch "ui" (huis, uit, buiten) has no Portuguese equivalent. It starts with a rounded "ó" and glides to a rounded "i". Portuguese speakers often say "ói" which is close but not rounded enough
+- **"uu" / "u" sound**: Like French and German "ü" — lips of "u", tongue of "i". Portuguese speakers substitute "u" which is a different vowel entirely
+- **dt-rule in pronunciation**: The "dt" ending is silent in terms of the "d" — "hij vindt" sounds like "vint", "wordt" sounds like "wort". The "d" is there for grammar only
+- **Schwa dominance**: Dutch is extremely schwa-heavy. Nearly every unstressed "e" becomes "uh". "lopen" = "LO-puh", "de" = "duh". Portuguese speakers tend to give full vowel quality to every syllable
+- **"w" sound**: Dutch "w" is between English "v" and "w" — a labiodental approximant. Portuguese speakers use either full "v" or full "u", both wrong
 
 #### For other native languages
 

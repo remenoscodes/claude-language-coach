@@ -1,7 +1,7 @@
 ---
 name: lang
 description: Full language coaching review for the current session
-argument-hint: "[en|es|fr|it|de|ja|ko|all]"
+argument-hint: "[en|es|fr|it|de|ja|ko|nl|all]"
 disable-model-invocation: true
 ---
 
@@ -289,6 +289,46 @@ What persists? New patterns discovered?]
 
 ## Hangul Spelling
 [받침 errors, sound change rules (nasalization, palatalization), common traps]
+
+## Progress Notes
+[Compare with known patterns from memory file]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+## Review Format for Dutch (`nl`)
+
+```
+🇳🇱 Nederlands — Session Review
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## Grammar Patterns
+[V2 rule violations, separable verb errors, er-constructions, modal verb placement]
+
+## de/het (Gender)
+[de/het errors, adjective inflection (de grote man vs het grote huis vs een groot huis)]
+[Diminutive gender (always het)]
+
+## Spelling
+[dt-rule errors (hij vindt, jij wordt), open/closed syllable rules]
+[ei/ij confusion, double vowel patterns]
+
+## False Friends (native → nl)
+[Native-Dutch false cognates detected in context]
+[e.g., en "slim" ≠ nl "slim" (smart), en "monster" ≠ nl "monster" (sample)]
+[e.g., de "eventueel" = possibly (not eventually)]
+
+## Vocabulary
+[Words used correctly — reinforce. Suggest alternatives.]
+
+## Pronunciation
+[For vocabulary terms taught this session, show 🔊 native_language approximations]
+[Flag: g/ch guttural sounds, ui/eu/oe diphthongs, schwa rhythm]
+
+## Word Order
+[V2 violations, subordinate clause verb position, inversion after adverbs]
+
+## Diminutives
+[Suffix selection (-je/-tje/-pje/-etje/-kje), meaning shifts, gender (always het)]
 
 ## Progress Notes
 [Compare with known patterns from memory file]

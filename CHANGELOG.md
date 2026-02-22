@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-02-22
+
+### Added
+- **Dutch (Netherlands) language template**: JSON + Markdown coaching memory templates with Dutch-specific sections (de/het gender, dt-rule spelling, V2 word order, diminutives, er-constructions)
+- **Dutch review format**: session review block in `/lang` skill with grammar, de/het gender, spelling, false friends, vocabulary, pronunciation, word order, diminutives sections
+- **Pronunciation reference table**: pt-BR → Dutch (13 sound mappings including guttural g/ch, ui/eu/oe diphthongs, schwa, ij/ei)
+- **Pronunciation traps**: pt-BR → Dutch (guttural g/ch, ui diphthong, uu/u sound, dt-rule pronunciation, schwa dominance, w sound)
+- Keywords `dutch` and `netherlands` added to plugin.json
+- 🇳🇱 Nederlands flag added to flag mappings in language-coaching and setup skills
+- `nl` language code added to `/lang` argument hint and setup examples
+- All 8 language templates now complete (en, es, fr, it, de, ja, ko, nl)
+
 ## [1.7.2] - 2026-02-22
 
 ### Fixed
