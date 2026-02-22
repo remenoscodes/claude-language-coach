@@ -88,7 +88,7 @@ All pronunciation tables are generated relative to the user's configured `native
 ### As a plugin (recommended)
 
 ```
-/plugin marketplace add remenoscodes/claude-language-coach
+/plugin marketplace add remenoscodes/claude-plugin-marketplace
 /plugin install claude-language-coach
 ```
 
