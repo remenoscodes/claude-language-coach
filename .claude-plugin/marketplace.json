@@ -1,0 +1,14 @@
+{
+  "name": "claude-language-coach",
+  "owner": {
+    "name": "Emerson Soares",
+    "url": "https://github.com/remenoscodes"
+  },
+  "plugins": [
+    {
+      "name": "claude-language-coach",
+      "description": "Ambient language coaching during coding sessions. Learn languages through your daily work with contextual grammar corrections, vocabulary suggestions, and false friend alerts.",
+      "source": "."
+    }
+  ]
+}
