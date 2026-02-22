@@ -1,7 +1,7 @@
 {
   "name": "claude-language-coach",
   "description": "Ambient language coaching during coding sessions. Learn languages through your daily work with contextual grammar corrections, vocabulary suggestions, false friend alerts, and pronunciation guidance.",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "license": "MIT",
   "keywords": ["language", "coaching", "learning", "grammar", "english", "spanish", "french", "italian", "german", "japanese", "korean", "dutch", "netherlands", "ambient", "pronunciation"],
   "author": {
