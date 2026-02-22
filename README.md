@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/github/v/release/remenoscodes/claude-language-coach?label=version)](https://github.com/remenoscodes/claude-language-coach/releases)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-plugin-7C3AED)](https://code.claude.com)
-[![Languages](https://img.shields.io/badge/languages-7-green)](https://github.com/remenoscodes/claude-language-coach)
+[![Languages](https://img.shields.io/badge/languages-8-green)](https://github.com/remenoscodes/claude-language-coach)
 
 Ambient language coaching for [Claude Code](https://code.claude.com). Learn languages through your daily coding sessions with contextual grammar corrections, vocabulary suggestions, false friend alerts, pronunciation guidance, and spaced repetition reviews.
 
@@ -80,6 +80,7 @@ A pattern you corrected before comes up for review:
 | German   | 🇩🇪  | ✅        | ✅ 15 mappings | ✅             | ✅ 5   |
 | Japanese | 🇯🇵  | ✅        | ✅ 9 mappings  | ✅             | ✅ 5   |
 | Korean   | 🇰🇷  | ✅        | ✅ 11 mappings | ✅             | ✅ 5   |
+| Dutch    | 🇳🇱  | ✅        | ✅ 13 mappings | ✅             | ✅ 6   |
 
 All pronunciation tables are generated relative to the user's configured `native_language`. The counts above show pt-BR reference mappings; the system adapts to any native language.
 
@@ -167,7 +168,7 @@ languages:
 | Field | Values | Description |
 |-------|--------|-------------|
 | `native_language` | Any language code | Your mother tongue (used for explanations and pronunciation) |
-| `code` | `en`, `es`, `fr`, `de`, `it`, `ja`, `ko` | Target language to coach |
+| `code` | `en`, `es`, `fr`, `de`, `it`, `ja`, `ko`, `nl` | Target language to coach |
 | `level` | `beginner`, `intermediate`, `advanced` | Your current level |
 | `intensity` | `quiet`, `normal`, `intensive` | How often coaching appears |
 | `mode` | `corrective`, `active`, `both` | Corrections only, vocabulary only, or both (default: `both`) |
@@ -209,7 +210,7 @@ Examples (for a pt-BR speaker):
 - Spanish "desarrollo" → `🔊 "de-sa-RRO-lho"`
 - German "Entwicklung" → `🔊 "ent-VIK-lung"`
 
-The plugin ships with reference pronunciation tables for pt-BR speakers (83 total sound mappings across 7 languages) and adapts to any configured `native_language`.
+The plugin ships with reference pronunciation tables for pt-BR speakers (96 total sound mappings across 8 languages) and adapts to any configured `native_language`.
 
 ### Spaced repetition (SRS)
 
@@ -244,7 +245,7 @@ The plugin tracks your patterns over time using dual memory files stored globall
 - `{language}-coaching.json` — structured source of truth
 - `{language}-coaching.md` — human-readable companion (auto-regenerated from JSON)
 
-Progress persists across all projects. Run `/claude-language-coach:setup` to set this up automatically. Templates available for all 7 languages.
+Progress persists across all projects. Run `/claude-language-coach:setup` to set this up automatically. Templates available for all 8 languages.
 
 ## Design principles
 
@@ -263,7 +264,7 @@ Areas that could use help:
 - Pronunciation tables for non-pt-BR native speakers
 - SRS algorithm tuning (interval parameters, ease factor decay)
 - Better heuristics for detecting code-switching vs intentional language use
-- Support for additional languages beyond the current 7
+- Support for additional languages beyond the current 8
 
 ## License
 

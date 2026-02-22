@@ -23,7 +23,7 @@ Beyond language templates, these areas could use help:
 
 ## Adding a new language template
 
-All 7 planned languages (en, es, fr, it, de, ja, ko) are complete. To add support for a new language beyond these, each needs two template files and a review format block.
+All 8 planned languages (en, es, fr, it, de, ja, ko, nl) are complete. To add support for a new language beyond these, each needs two template files and a review format block.
 
 ### Checklist
 
@@ -78,6 +78,7 @@ All 7 planned languages (en, es, fr, it, de, ja, ko) are complete. To add suppor
 - German: [`german-coaching.md`](skills/lang/templates/german-coaching.md), [`german-coaching.json`](skills/lang/templates/german-coaching.json)
 - Japanese: [`japanese-coaching.md`](skills/lang/templates/japanese-coaching.md), [`japanese-coaching.json`](skills/lang/templates/japanese-coaching.json)
 - Korean: [`korean-coaching.md`](skills/lang/templates/korean-coaching.md), [`korean-coaching.json`](skills/lang/templates/korean-coaching.json)
+- Dutch: [`dutch-coaching.md`](skills/lang/templates/dutch-coaching.md), [`dutch-coaching.json`](skills/lang/templates/dutch-coaching.json)
 
 ## Commit conventions
 

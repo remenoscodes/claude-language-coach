@@ -12,7 +12,7 @@ Guide the user through configuring their language coaching preferences. This cre
 
 ### 1. Ask for native language
 
-Ask the user what their native/mother tongue is. Examples: pt-BR, es, en, fr, de, ja, zh, ko.
+Ask the user what their native/mother tongue is. Examples: pt-BR, es, en, fr, de, ja, zh, ko, nl.
 
 ### 2. Ask for target languages
 
@@ -104,7 +104,7 @@ SRS Review (lighter, only when no correction/teaching fires):
 💭 **{correct form}** — last corrected {date}. Recall: {explanation}
 `─────────────────────────────────────────────────`
 
-Flags: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語, 🇰🇷 한국어
+Flags: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語, 🇰🇷 한국어, 🇳🇱 Nederlands
 
 ## Trigger Rules
 - Correct when: recurring grammar pattern, code-switching, false friend, more idiomatic phrasing
