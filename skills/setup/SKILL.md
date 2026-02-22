@@ -109,4 +109,4 @@ Fill in all placeholders with the user's actual data.
 Summarize what was configured and tell the user:
 - Coaching is now active (no restart needed for config changes)
 - They can adjust settings by editing the config section or running this setup again
-- Use the `/lang` skill (namespaced as `/claude-language-coach:lang` if installed as plugin) for on-demand session reviews
+- Use the `lang` skill for on-demand session reviews

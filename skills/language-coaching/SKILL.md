@@ -36,7 +36,7 @@ If no config is found, the plugin still works:
 - **Default intensity**: `normal`
 - **Default level**: `intermediate`
 - **Target language**: whatever non-native language the user is writing in
-- On the first coaching block, suggest running the `setup` skill to customize (invoked as `/setup` standalone or `/claude-language-coach:setup` as plugin)
+- On the first coaching block, suggest running the `setup` skill to customize
 
 ## Coaching Block Format
 
