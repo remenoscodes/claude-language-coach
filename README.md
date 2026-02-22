@@ -57,11 +57,11 @@ This guides you through choosing your native language, target languages, intensi
 
 ### Manual (standalone)
 
-Clone the repo and copy skills into your personal Claude config:
+Clone the repo and copy the plugin skills into your personal Claude config:
 
 ```bash
 git clone https://github.com/remenoscodes/claude-language-coach.git
-cp -r claude-language-coach/skills/* ~/.claude/skills/
+cp -r claude-language-coach/plugins/claude-language-coach/skills/* ~/.claude/skills/
 ```
 
 With manual installation, skills use short names (`/lang`, `/setup` instead of `/claude-language-coach:lang`, `/claude-language-coach:setup`).
@@ -71,7 +71,7 @@ With manual installation, skills use short names (`/lang`, `/setup` instead of `
 Test the plugin without installing:
 
 ```bash
-claude --plugin-dir ./claude-language-coach
+claude --plugin-dir ./claude-language-coach/plugins/claude-language-coach
 ```
 
 ### Skills reference (plugin install)
@@ -134,7 +134,7 @@ Run `/claude-language-coach:setup` to set this up automatically, or create the f
 mkdir -p ~/.claude/coaching
 ```
 
-Each language gets its own file (e.g., `english-coaching.md`, `spanish-coaching.md`). Templates for [English](skills/lang/templates/english-coaching.md) and [Spanish](skills/lang/templates/spanish-coaching.md) are available in the repo.
+Each language gets its own file (e.g., `english-coaching.md`, `spanish-coaching.md`). Templates for [English](plugins/claude-language-coach/skills/lang/templates/english-coaching.md) and [Spanish](plugins/claude-language-coach/skills/lang/templates/spanish-coaching.md) are available in the repo.
 
 The plugin reads and updates these files across sessions, tracking:
 - Recurring grammar patterns
