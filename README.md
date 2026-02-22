@@ -126,13 +126,15 @@ Or run `/claude-language-coach:setup` to create this interactively.
 
 ## Progress tracking
 
-The plugin can track your patterns over time using memory files. Run `/claude-language-coach:setup` to set this up automatically, or create the files manually:
+The plugin can track your patterns over time using memory files stored globally at `~/.claude/coaching/`. This means your language progress persists across all projects.
+
+Run `/claude-language-coach:setup` to set this up automatically, or create the files manually:
 
 ```bash
-mkdir -p ~/.claude/projects/<your-project>/memory
+mkdir -p ~/.claude/coaching
 ```
 
-Templates are available in the repo at [`skills/lang/templates/`](skills/lang/templates/).
+Each language gets its own file (e.g., `english-coaching.md`, `spanish-coaching.md`). Templates for [English](skills/lang/templates/english-coaching.md) and [Spanish](skills/lang/templates/spanish-coaching.md) are available in the repo.
 
 The plugin reads and updates these files across sessions, tracking:
 - Recurring grammar patterns

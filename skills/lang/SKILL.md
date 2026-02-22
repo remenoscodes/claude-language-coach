@@ -17,7 +17,7 @@ The target language is: `$ARGUMENTS` (default to `en` if empty or not specified)
 
 1. Review ALL user messages in this conversation
 2. Reference the user's ACTUAL messages — quote specific phrases
-3. Check the relevant coaching memory file for known patterns
+3. Check the relevant coaching memory file at `~/.claude/coaching/{language}-coaching.md` for known patterns
 4. Provide the review in the format below
 5. After the review, update the relevant memory file with any new patterns discovered
 

@@ -36,7 +36,7 @@ If no config is found, the plugin still works:
 - **Default intensity**: `normal`
 - **Default level**: `intermediate`
 - **Target language**: whatever non-native language the user is writing in
-- Suggest running `/claude-language-coach:setup` on the first coaching block to customize
+- On the first coaching block, suggest running the `setup` skill to customize (invoked as `/setup` standalone or `/claude-language-coach:setup` as plugin)
 
 ## Coaching Block Format
 
@@ -82,12 +82,14 @@ A coaching block SHOULD NOT appear when:
 ## Placement
 
 - Coaching blocks go **at the end** of the response, after ALL task-related content
-- They come **after** any other educational blocks (like `★ Insight`) if both are present
+- They come **after** any other supplementary blocks if both are present
 - Never let coaching interrupt the flow of a technical answer
 
 ## Memory Tracking
 
-If the user has coaching memory files (e.g., `english-coaching.md`, `spanish-coaching.md` in their project memory directory), consult them for known patterns and update them when new recurring patterns are confirmed (seen 2+ times across sessions).
+Coaching memory files are stored globally at `~/.claude/coaching/` so that language progress persists across all projects. Each language has its own file (e.g., `~/.claude/coaching/english-coaching.md`, `~/.claude/coaching/spanish-coaching.md`).
+
+If these files exist, consult them for known patterns and update them when new recurring patterns are confirmed (seen 2+ times across sessions).
 
 ## Key Principles
 

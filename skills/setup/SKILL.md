@@ -1,7 +1,6 @@
 ---
 name: setup
 description: Interactive setup for language coaching preferences
-argument-hint: ""
 disable-model-invocation: true
 ---
 
@@ -31,7 +30,6 @@ Explain the intensity levels briefly:
 Determine the right CLAUDE.md location:
 - `~/.claude/CLAUDE.md` — global (all projects)
 - `.claude/CLAUDE.md` — project-specific
-- `~/CLAUDE.md` — if the user already has one here
 
 Check if the user already has a CLAUDE.md file and suggest the best location.
 
@@ -53,17 +51,62 @@ If a `# Language Coaching Config` section already exists, update it instead of d
 
 ### 5. Create memory files (optional)
 
-Ask if the user wants progress tracking across sessions. If yes, create the coaching memory file(s) in their project memory directory:
+Ask if the user wants progress tracking across sessions. If yes, create the coaching memory file(s) in a global directory so progress persists across all projects.
 
-```
-~/.claude/projects/<project>/memory/{language}-coaching.md
+The memory file path follows: `~/.claude/coaching/{language}-coaching.md`
+
+Create the directory if it doesn't exist: `mkdir -p ~/.claude/coaching`
+
+Create the file with this structure for **English**:
+
+```markdown
+# English Coaching — {User Name}
+
+Native language: {native_language}
+Level: {level}
+Active since: {today's date}
+
+## Recurring Patterns
+
+### Grammar
+### Spelling
+### Native Language Interference
+### Word Choice
+### Prepositions
+
+## Vocabulary Acquired in Context
+## False Friends Log
+## Session History
 ```
 
-Use the templates from `skills/lang/templates/` as a starting point, filling in the placeholders with the user's actual data.
+For **Spanish**, use this structure:
+
+```markdown
+# Spanish Coaching — {User Name}
+
+Native language: {native_language}
+Level: {level}
+Active since: {today's date}
+
+## Recurring Patterns
+
+### Grammar
+### Spelling
+### Native Language Interference
+### Register
+
+## False Friends Log
+## Vocabulary Acquired in Context
+## Session History
+```
+
+For **other languages**, follow the English structure but adapt sections to the language's specific challenges (e.g., add "Kanji" for Japanese, "Cases" for German, "Gender" for French).
+
+Fill in all placeholders with the user's actual data.
 
 ### 6. Confirm
 
 Summarize what was configured and tell the user:
 - Coaching is now active (no restart needed for config changes)
 - They can adjust settings by editing the config section or running this setup again
-- Use `/claude-language-coach:lang {code}` for on-demand session reviews
+- Use the `/lang` skill (namespaced as `/claude-language-coach:lang` if installed as plugin) for on-demand session reviews

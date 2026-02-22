@@ -1,8 +1,9 @@
 {
   "name": "claude-language-coach",
   "description": "Ambient language coaching during coding sessions. Learn languages through your daily work with contextual grammar corrections, vocabulary suggestions, and false friend alerts.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
+  "keywords": ["language", "coaching", "learning", "grammar", "english", "spanish", "ambient"],
   "author": {
     "name": "Emerson Soares",
     "url": "https://github.com/remenoscodes"
