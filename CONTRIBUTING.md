@@ -9,7 +9,7 @@ Test the plugin without installing:
 ```bash
 git clone https://github.com/remenoscodes/claude-language-coach.git
 cd claude-language-coach
-claude --plugin-dir ./plugins/claude-language-coach
+claude --plugin-dir .
 ```
 
 ## Other contributions
@@ -27,11 +27,11 @@ All 7 planned languages (en, es, fr, it, de, ja, ko) are complete. To add suppor
 
 ### Checklist
 
-- [ ] Create `plugins/claude-language-coach/skills/lang/templates/{language}-coaching.json`
-- [ ] Create `plugins/claude-language-coach/skills/lang/templates/{language}-coaching.md`
-- [ ] Add a review format block to `plugins/claude-language-coach/skills/lang/SKILL.md`
-- [ ] Add flag emoji to mapping in `plugins/claude-language-coach/skills/language-coaching/SKILL.md` (if not already there)
-- [ ] Add language name to `keywords` in `plugins/claude-language-coach/.claude-plugin/plugin.json`
+- [ ] Create `skills/lang/templates/{language}-coaching.json`
+- [ ] Create `skills/lang/templates/{language}-coaching.md`
+- [ ] Add a review format block to `skills/lang/SKILL.md`
+- [ ] Add flag emoji to mapping in `skills/language-coaching/SKILL.md` (if not already there)
+- [ ] Add language name to `keywords` in `.claude-plugin/plugin.json`
 - [ ] Update CHANGELOG.md
 - [ ] Test locally with `claude --plugin-dir`
 
@@ -67,17 +67,17 @@ All 7 planned languages (en, es, fr, it, de, ja, ko) are complete. To add suppor
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    ```
 
-4. **Test** by running `claude --plugin-dir ./plugins/claude-language-coach` and having a conversation that mixes your target language
+4. **Test** by running `claude --plugin-dir .` and having a conversation that mixes your target language
 
 ### Reference implementations
 
-- English: [`english-coaching.md`](plugins/claude-language-coach/skills/lang/templates/english-coaching.md), [`english-coaching.json`](plugins/claude-language-coach/skills/lang/templates/english-coaching.json)
-- Spanish: [`spanish-coaching.md`](plugins/claude-language-coach/skills/lang/templates/spanish-coaching.md), [`spanish-coaching.json`](plugins/claude-language-coach/skills/lang/templates/spanish-coaching.json)
-- French: [`french-coaching.md`](plugins/claude-language-coach/skills/lang/templates/french-coaching.md), [`french-coaching.json`](plugins/claude-language-coach/skills/lang/templates/french-coaching.json)
-- Italian: [`italian-coaching.md`](plugins/claude-language-coach/skills/lang/templates/italian-coaching.md), [`italian-coaching.json`](plugins/claude-language-coach/skills/lang/templates/italian-coaching.json)
-- German: [`german-coaching.md`](plugins/claude-language-coach/skills/lang/templates/german-coaching.md), [`german-coaching.json`](plugins/claude-language-coach/skills/lang/templates/german-coaching.json)
-- Japanese: [`japanese-coaching.md`](plugins/claude-language-coach/skills/lang/templates/japanese-coaching.md), [`japanese-coaching.json`](plugins/claude-language-coach/skills/lang/templates/japanese-coaching.json)
-- Korean: [`korean-coaching.md`](plugins/claude-language-coach/skills/lang/templates/korean-coaching.md), [`korean-coaching.json`](plugins/claude-language-coach/skills/lang/templates/korean-coaching.json)
+- English: [`english-coaching.md`](skills/lang/templates/english-coaching.md), [`english-coaching.json`](skills/lang/templates/english-coaching.json)
+- Spanish: [`spanish-coaching.md`](skills/lang/templates/spanish-coaching.md), [`spanish-coaching.json`](skills/lang/templates/spanish-coaching.json)
+- French: [`french-coaching.md`](skills/lang/templates/french-coaching.md), [`french-coaching.json`](skills/lang/templates/french-coaching.json)
+- Italian: [`italian-coaching.md`](skills/lang/templates/italian-coaching.md), [`italian-coaching.json`](skills/lang/templates/italian-coaching.json)
+- German: [`german-coaching.md`](skills/lang/templates/german-coaching.md), [`german-coaching.json`](skills/lang/templates/german-coaching.json)
+- Japanese: [`japanese-coaching.md`](skills/lang/templates/japanese-coaching.md), [`japanese-coaching.json`](skills/lang/templates/japanese-coaching.json)
+- Korean: [`korean-coaching.md`](skills/lang/templates/korean-coaching.md), [`korean-coaching.json`](skills/lang/templates/korean-coaching.json)
 
 ## Commit conventions
 

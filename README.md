@@ -110,8 +110,8 @@ Clone the repo and copy the plugin skills and hooks into your personal Claude co
 
 ```bash
 git clone https://github.com/remenoscodes/claude-language-coach.git
-cp -r claude-language-coach/plugins/claude-language-coach/skills/* ~/.claude/skills/
-cp -r claude-language-coach/plugins/claude-language-coach/hooks ~/.claude/hooks/
+cp -r claude-language-coach/skills/* ~/.claude/skills/
+cp -r claude-language-coach/hooks ~/.claude/hooks/
 ```
 
 With manual installation, skills use short names (`/lang`, `/setup` instead of `/claude-language-coach:lang`, `/claude-language-coach:setup`).
@@ -123,7 +123,7 @@ After copying, run `/setup` to write the coaching instructions to your CLAUDE.md
 Test the plugin without installing:
 
 ```bash
-claude --plugin-dir ./claude-language-coach/plugins/claude-language-coach
+claude --plugin-dir ./claude-language-coach
 ```
 
 ### Skills reference (plugin install)
