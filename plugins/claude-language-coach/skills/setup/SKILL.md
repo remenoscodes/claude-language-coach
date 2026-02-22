@@ -81,6 +81,14 @@ For each target language, create **TWO companion files**:
 }
 ```
 
+**CRITICAL schema rules**:
+- The top-level keys are ONLY: `version`, `language`, `native_language`, `level`, `active_since`, `patterns`, `vocabulary`, `sessions`, `stats`. Do NOT add extra keys like `false_friends`.
+- False friends go in the `patterns` array with `"type": "false_friend"`.
+- Each pattern entry MUST have string slug IDs in `{type}-{kebab-case}` format (e.g., `"id": "grammar-didnt-plus-past"`). NEVER use integer IDs.
+- Each pattern MUST include SRS fields: `"next_review": null, "interval_days": null, "ease_factor": null`
+- Each pattern MUST include tracking fields: `"times_correct_since_last_error": 0, "last_correct_usage": null`
+- See the `language-coaching` skill for the full Pattern Object Schema.
+
 #### Markdown file (human-readable): `~/.claude/coaching/{language}-coaching.md`
 
 Generate the initial markdown from the JSON with this structure:

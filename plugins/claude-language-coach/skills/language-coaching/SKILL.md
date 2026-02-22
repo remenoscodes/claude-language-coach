@@ -100,6 +100,37 @@ Coaching memory uses TWO companion files per language at `~/.claude/coaching/`:
    - All patterns where `resolved` is false (active patterns to watch for)
    - The `times_corrected` count (high counts = persistent patterns, prioritize these)
 
+### Pattern Object Schema
+
+Every entry in the `patterns` array MUST use this exact structure — no exceptions, no extra keys, no missing fields:
+
+```json
+{
+  "id": "grammar-didnt-plus-past",
+  "type": "grammar",
+  "native_form": "didn't worked",
+  "target_correction": "didn't work",
+  "explanation": "Auxiliary 'did' carries past tense; main verb stays in base form",
+  "examples": ["didn't worked → didn't work"],
+  "times_corrected": 2,
+  "times_correct_since_last_error": 0,
+  "first_seen": "2026-02-22",
+  "last_seen": "2026-02-22",
+  "last_correct_usage": null,
+  "resolved": false,
+  "next_review": null,
+  "interval_days": null,
+  "ease_factor": null
+}
+```
+
+**ID format**: `{type}-{kebab-case-2-4-words}` — NEVER use integers, NEVER use UUIDs.
+**Type values**: `grammar`, `spelling`, `interference`, `false_friend`, `word_choice`, `preposition`, `register`
+**SRS fields**: `next_review`, `interval_days`, `ease_factor` — ALWAYS present, set to `null` until SRS activates.
+**Positive tracking**: `times_correct_since_last_error` starts at `0`, `last_correct_usage` starts at `null`.
+
+**CRITICAL**: False friends go in the `patterns` array with `type: "false_friend"`. Do NOT create a separate `false_friends` array in the JSON. The top-level JSON keys are ONLY: `version`, `language`, `native_language`, `level`, `active_since`, `patterns`, `vocabulary`, `sessions`, `stats`.
+
 ### On Correction (writing memory)
 
 After generating a coaching block, update the JSON file:
@@ -110,7 +141,7 @@ After generating a coaching block, update the JSON file:
    - Search existing patterns by `id`
    - If found: increment `times_corrected`, update `last_seen` to today, add to `examples` array (max 5, drop oldest if full)
    - If NOT found AND this is the first sighting ever: do NOT create a pattern entry yet. Patterns are only persisted after 2+ sightings.
-   - If NOT found AND you have seen this in a previous session (check the `.md` file or your own memory of this session): create a new pattern entry with `times_corrected: 1`, `first_seen` and `last_seen` set to today, `resolved: false`, all SRS fields set to null
+   - If NOT found AND you have seen this in a previous session (check the `.md` file or your own memory of this session): create a new pattern entry following the **Pattern Object Schema** above, with `times_corrected: 1`, `first_seen` and `last_seen` set to today, `resolved: false`, all SRS fields set to `null`, `times_correct_since_last_error: 0`, `last_correct_usage: null`
 3. Update the `stats` object: recalculate `patterns_active` and `total_corrections`
 4. **Write** the updated JSON back using the Write tool
 5. **Regenerate** the markdown file from the JSON (see Markdown Regeneration below)

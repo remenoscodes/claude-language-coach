@@ -44,11 +44,14 @@ When a `.md` memory file exists but no `.json` companion:
    - Under "## False Friends Log": extract as `false_friend` type patterns
    - Under "## Vocabulary Acquired in Context": extract as vocabulary entries
    - Under "## Session History": extract as session entries
-3. For each extracted pattern:
-   - Generate an `id` slug as `{type}-{kebab-case-2-4-word-description}`
+3. For each extracted pattern, create an entry following the Pattern Object Schema from the `language-coaching` skill:
+   - Generate an `id` slug as `{type}-{kebab-case-2-4-word-description}` — NEVER use integer IDs
    - Set `first_seen` and `last_seen` to today (exact dates not recoverable from freeform markdown)
    - Set `times_corrected` to 1 (minimum, since it was recorded)
-   - Set `resolved` to false, all SRS fields to null
+   - Set `resolved` to false
+   - Include ALL required fields: `native_form`, `target_correction`, `explanation`, `examples` (array), `times_correct_since_last_error: 0`, `last_correct_usage: null`
+   - Include SRS fields: `next_review: null`, `interval_days: null`, `ease_factor: null`
+   - False friends go in the `patterns` array with `type: "false_friend"` — do NOT create a separate `false_friends` key
 4. Create the JSON structure with `version: 1`
 5. Write the JSON file
 6. Regenerate the markdown from JSON (normalizes the format)

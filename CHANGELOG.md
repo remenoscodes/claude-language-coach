@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-02-22
+
+### Fixed
+- Pattern IDs now enforced as typed slugs (`grammar-didnt-plus-past`) instead of integers
+- SRS fields (`next_review`, `interval_days`, `ease_factor`) and positive tracking fields (`times_correct_since_last_error`, `last_correct_usage`) now required in every pattern entry
+- False friends must go in `patterns` array with `type: "false_friend"` — no separate `false_friends` key allowed
+- Added explicit Pattern Object Schema to ambient coaching skill
+- Setup and lang skills reference canonical schema for consistency
+
 ## [1.0.0] - 2026-02-22
 
 ### Added
