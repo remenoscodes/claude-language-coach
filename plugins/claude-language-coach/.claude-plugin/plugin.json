@@ -3,6 +3,8 @@
   "description": "Ambient language coaching during coding sessions. Learn languages through your daily work with contextual grammar corrections, vocabulary suggestions, false friend alerts, and pronunciation guidance.",
   "version": "1.3.0",
   "license": "MIT",
+  "category": "learning",
+  "tags": ["learning", "language", "coaching", "ambient", "grammar", "vocabulary", "pronunciation"],
   "keywords": ["language", "coaching", "learning", "grammar", "english", "spanish", "ambient", "pronunciation"],
   "author": {
     "name": "Emerson Soares",
