@@ -31,6 +31,19 @@ Claude answers your question normally, then appends:
 ─────────────────────────────────────────────────
 ```
 
+Working on a deployment and Claude teaches you the Spanish term:
+
+```
+🇪🇸 Español ──────────────────────────────────
+💡 "deploy" → desplegar (v.)
+  🔊 "des-ple-GAR"
+  "We need to deploy to production" → "Necesitamos desplegar en producción"
+  📝 Regular -ar verb. Stem change: despliego, despliegas...
+─────────────────────────────────────────────────
+```
+
+The 🔊 line shows how the word sounds using your native language's syllables, with the stressed syllable in CAPS.
+
 ## Installation
 
 ### As a plugin (recommended)
@@ -141,6 +154,21 @@ The plugin reads and updates these files across sessions, tracking:
 - Native language interference
 - False friends encountered in context
 - Vocabulary acquired through work sessions
+
+## Pronunciation coaching
+
+Every vocabulary word taught by the plugin includes a pronunciation guide using your native language's sounds. No IPA knowledge needed.
+
+- Syllables are separated by hyphens
+- The **stressed syllable** is in CAPS
+- Sounds that don't exist in your native language get a brief tip (written in your native language)
+
+Examples (for a pt-BR speaker):
+- English "authentication" → `🔊 "ó-fen-ti-KEI-shon"`
+- Spanish "desarrollo" → `🔊 "de-sa-RRO-lho"`
+- English "schedule" → `🔊 "SKE-djul"`
+
+The plugin ships with reference pronunciation tables for pt-BR speakers and automatically adapts to any configured `native_language` by constructing analogous approximations.
 
 ## Design principles
 

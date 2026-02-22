@@ -28,11 +28,14 @@ The target language is: `$ARGUMENTS` (default to `en` if empty or not specified)
 5. For known patterns that the user got RIGHT in this session:
    - Update `last_correct_usage`, increment `times_correct_since_last_error`
    - Mention this in Progress Notes as positive reinforcement
-6. Provide the review in the format below
-7. After the review, **write** the updated JSON file
-8. **Regenerate** the markdown file from the JSON (follow the Markdown Regeneration format from the language-coaching skill)
-9. Add a new entry to the `sessions` array with: `date`, `project` (if identifiable), `patterns_addressed`, `new_patterns`, `patterns_correct`, `vocabulary_used`, and `notes`
-10. Recalculate the `stats` object: `total_sessions`, `total_corrections` (sum of all pattern `times_corrected`), `patterns_resolved`, `patterns_active`, `vocabulary_size`, `last_session`
+6. For vocabulary entries reviewed or taught in this session:
+   - If the entry has a `pronunciation` field: display it in the Pronunciation section
+   - If the entry has NO `pronunciation` field (pre-v1.3.0 legacy): generate one following the Pronunciation Guidelines from the `language-coaching` skill, update the JSON entry with the new field, and display it
+7. Provide the review in the format below
+8. After the review, **write** the updated JSON file
+9. **Regenerate** the markdown file from the JSON (follow the Markdown Regeneration format from the language-coaching skill)
+10. Add a new entry to the `sessions` array with: `date`, `project` (if identifiable), `patterns_addressed`, `new_patterns`, `patterns_correct`, `vocabulary_used`, and `notes`
+11. Recalculate the `stats` object: `total_sessions`, `total_corrections` (sum of all pattern `times_corrected`), `patterns_resolved`, `patterns_active`, `vocabulary_size`, `last_session`
 
 ## Migration Protocol (md-to-json)
 
@@ -70,6 +73,10 @@ When a `.md` memory file exists but no `.json` companion:
 [Words used correctly in context — reinforce these]
 [Suggest more precise/idiomatic alternatives where applicable]
 
+## Pronunciation
+[For vocabulary terms taught this session, show 🔊 native_language approximations]
+[Flag pronunciation traps relevant to the user's native_language → English]
+
 ## False Friends (native → en)
 [Any native language interference patterns detected]
 
@@ -100,6 +107,10 @@ What persists? New patterns discovered?]
 
 ## Vocabulary
 [Words used correctly — reinforce. Suggest alternatives.]
+
+## Pronunciation
+[For vocabulary terms taught this session, show 🔊 native_language approximations]
+[Flag pronunciation traps relevant to the user's native_language → Spanish]
 
 ## Register & Formality
 [tu vs usted, voseo awareness if relevant]

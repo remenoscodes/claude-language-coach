@@ -24,6 +24,10 @@ Active since: {date}
 ## Vocabulary Acquired in Context
 <!-- Technical and general vocabulary correctly used in work sessions -->
 
+## Pronunciation Notes
+<!-- Pronunciation traps and patterns specific to this learner -->
+<!-- e.g., tendency to add vowels to final consonant clusters, stress misplacement -->
+
 ## False Friends Log
 <!-- Native language words that led to wrong English usage -->
 

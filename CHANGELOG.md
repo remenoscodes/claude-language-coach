@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-02-22
+
+### Added
+- **Pronunciation coaching**: every active teaching block now includes a 🔊 line with phonetic approximation using the user's native language sounds
+- Pronunciation Guidelines section in ambient skill with format rules, generation process, and sound mapping tables
+- Reference mapping tables for pt-BR speakers (English and Spanish target languages)
+- Pronunciation trap documentation (pt-BR → English, pt-BR → Spanish, plus guidance for other native languages)
+- `pronunciation` field in Vocabulary Object Schema (string, nullable)
+- Pronunciation section in session review output (`/lang`) for both English and Spanish formats
+- Pronunciation Notes section in coaching memory markdown templates
+- Legacy vocabulary backfill: session review generates pronunciation for pre-v1.3.0 entries missing the field
+
+### Changed
+- Active Teaching Block format now includes 🔊 line after term introduction
+- Markdown regeneration includes pronunciation in vocabulary listing
+- Pronunciation system is native-language-aware (adapts to configured `native_language`, not hardcoded)
+
 ## [1.2.0] - 2026-02-22
 
 ### Added
