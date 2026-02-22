@@ -19,11 +19,17 @@ Ask the user what their native/mother tongue is. Examples: pt-BR, es, en, fr, de
 Ask which languages they want coaching for. For each language, ask:
 - **Level**: beginner, intermediate, or advanced
 - **Intensity**: quiet, normal, or intensive
+- **Mode**: corrective, active, or both
 
 Explain the intensity levels briefly:
 - `quiet` — only errors that cause confusion (~1 per 10 messages)
 - `normal` — grammar, idioms, false friends (~1 per 3-5 messages)
 - `intensive` — feedback on nearly every message
+
+Explain the coaching modes briefly:
+- `corrective` — only fix mistakes when you write in the target language
+- `active` — teach vocabulary from your conversations, even when writing in other languages
+- `both` (recommended) — corrections + active vocabulary teaching
 
 ### 3. Ask where to save config
 
@@ -45,7 +51,10 @@ languages:
   - code: {lang_code}
     level: {level}
     intensity: {intensity}
+    mode: {mode}
 ```
+
+Mode defaults to `both` if not specified. Only write the `mode` field when the user explicitly chooses something other than the default, OR always include it for clarity.
 
 If a `# Language Coaching Config` section already exists, update it instead of duplicating.
 
