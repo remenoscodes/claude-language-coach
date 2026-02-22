@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-02-22
+
+### Added
+- **Active Teaching Mode**: proactively teaches target language vocabulary from conversation context, even when user writes in another language
+- Full micro-lesson block format: translation, part of speech, contextual sentence, grammar note, false friend warning
+- Vocabulary Object Schema with tracking (times shown, times used by user, false friend warnings)
+- Active teaching memory protocol (vocabulary entries persisted in JSON, rendered in markdown)
+- Selection criteria for teaching terms: false friend traps > domain verbs > technical nouns > expressions > general
+- Dual-mode coaching: corrections AND active teaching run simultaneously, both controlled by intensity level
+
+### Changed
+- Intensity levels now define frequency for both correction and active teaching
+- Activation section rewritten to describe corrective mode and active teaching mode separately
+- Trigger rules split into Correction Triggers and Active Teaching Triggers
+- Markdown regeneration includes richer vocabulary section (examples, false friend warnings, usage counts)
+- Key Principles expanded: contextual relevance, avoid vocabulary flooding
+
 ## [1.0.1] - 2026-02-22
 
 ### Fixed
