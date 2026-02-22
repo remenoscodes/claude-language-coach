@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-02-22
+
+### Added
+- **German language template**: JSON + Markdown coaching memory templates with German-specific sections (cases, gender with 3 genders, word order V2 rule, compound nouns, Umlaut spelling)
+- **Japanese language template**: JSON + Markdown coaching memory templates with Japanese-specific sections (particles は/が, keigo honorifics, writing system, counters, pitch accent)
+- **Korean language template**: JSON + Markdown coaching memory templates with Korean-specific sections (particles 은/는 vs 이/가, honorific speech levels, Hangul spelling with 받침, verb endings)
+- **German review format**: session review block with cases, gender & articles, word order, pronunciation sections
+- **Japanese review format**: session review block with particles, keigo, writing system, pronunciation sections
+- **Korean review format**: session review block with particles, honorifics, Hangul spelling, pronunciation sections
+- **Pronunciation reference tables**: pt-BR → German (15 sound mappings), pt-BR → Japanese (9 sound mappings), pt-BR → Korean (11 sound mappings)
+- **Pronunciation traps**: pt-BR → German (Umlauts, ch sounds, final devoicing, compound stress), pt-BR → Japanese (pitch accent, vowel length, geminate consonants), pt-BR → Korean (three-way consonant distinction, ㅓ/ㅗ, 받침 rules, consonant assimilation)
+- Keywords `german`, `japanese`, `korean` added to plugin.json
+- All 7 planned language templates now complete (en, es, fr, it, de, ja, ko)
+
 ## [1.5.0] - 2026-02-22
 
 ### Added

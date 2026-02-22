@@ -1,7 +1,7 @@
 ---
 name: lang
 description: Full language coaching review for the current session
-argument-hint: "[en|es|fr|it|all]"
+argument-hint: "[en|es|fr|it|de|ja|ko|all]"
 disable-model-invocation: true
 ---
 
@@ -178,6 +178,110 @@ What persists? New patterns discovered?]
 
 ## Verb Conjugation
 [Passato prossimo vs imperfetto, congiuntivo, irregular verbs]
+
+## Progress Notes
+[Compare with known patterns from memory file]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+## Review Format for German (`de`)
+
+```
+🇩🇪 Deutsch — Session Review
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## Grammar Patterns
+[Verb position (V2 rule, subordinate clause verb-final), modal verbs, separable prefixes]
+
+## Cases
+[Nominativ/Akkusativ/Dativ/Genitiv errors, preposition + case requirements]
+[Two-way prepositions: in, an, auf, über, unter, vor, hinter, neben, zwischen]
+
+## Gender & Articles
+[der/die/das errors, article declension across cases]
+[Compound noun gender (follows last component)]
+
+## False Friends (native → de)
+[Native-German false cognates detected in context]
+[e.g., en "gift" ≠ de "Gift" (poison), en "become" ≠ de "bekommen" (receive)]
+
+## Vocabulary
+[Words used correctly — reinforce. Suggest alternatives.]
+
+## Pronunciation
+[For vocabulary terms taught this session, show 🔊 native_language approximations]
+[Flag: ch sounds, Umlauts, final devoicing, word stress in compounds]
+
+## Word Order
+[V2 violations, subordinate clause verb position, TeKaMoLo]
+
+## Progress Notes
+[Compare with known patterns from memory file]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+## Review Format for Japanese (`ja`)
+
+```
+🇯🇵 日本語 — Session Review
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## Grammar Patterns
+[Particle usage, verb conjugation, sentence structure (SOV)]
+
+## Particles
+[は/が, に/で, を/が with potential verbs, compound particles]
+
+## Keigo (Honorifics)
+[丁寧語/尊敬語/謙譲語 usage, appropriate register for context]
+
+## False Friends
+[和製英語 (wasei-eigo) that differ from actual English/native language usage]
+[e.g., マンション = apartment, サービス = free/complimentary]
+
+## Vocabulary
+[Words used correctly — reinforce. Suggest alternatives.]
+
+## Pronunciation
+[For vocabulary terms taught this session, show 🔊 native_language approximations]
+[Flag: pitch accent, long vowels, geminate consonants (っ)]
+
+## Writing System
+[Kanji readings, hiragana/katakana usage, common kanji errors]
+
+## Progress Notes
+[Compare with known patterns from memory file]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+## Review Format for Korean (`ko`)
+
+```
+🇰🇷 한국어 — Session Review
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## Grammar Patterns
+[Particle usage, verb conjugation, sentence structure (SOV), connective endings]
+
+## Particles
+[은/는 vs 이/가, 에 vs 에서, object marker 을/를]
+
+## Honorifics
+[Speech levels (합쇼체/해요체/해체), -(으)시- infix, special honorific vocabulary]
+
+## False Friends
+[Konglish (콩글리시) terms that differ from English]
+[Sino-Korean words with different usage than Japanese/Chinese cognates]
+
+## Vocabulary
+[Words used correctly — reinforce. Suggest alternatives.]
+
+## Pronunciation
+[For vocabulary terms taught this session, show 🔊 native_language approximations]
+[Flag: consonant sound changes, 받침 rules, vowel distinctions]
+
+## Hangul Spelling
+[받침 errors, sound change rules (nasalization, palatalization), common traps]
 
 ## Progress Notes
 [Compare with known patterns from memory file]

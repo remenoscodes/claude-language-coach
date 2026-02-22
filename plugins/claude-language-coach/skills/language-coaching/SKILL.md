@@ -448,6 +448,56 @@ The following reference tables demonstrate this approach for **pt-BR** speakers.
 | open "o" ò /ɔ/ | "ó" (aberto) | Like Portuguese "ó" in "avó" |
 | closed "o" ó /o/ | "ô" (fechado) | Like Portuguese "ô" in "avô" |
 
+### Reference: pt-BR → German
+
+| German sound | pt-BR approximation | Notes |
+|--------------|---------------------|-------|
+| "ch" /ç/ (ich) | "sh" (suave) | Flag: ⚠️ "Como um 'sh' mais suave, com a língua mais para frente" |
+| "ch" /x/ (ach) | "rr" (garganta) | Similar to carioca "rr", back of throat |
+| "ü" /y/ (über) | "ü" (entre "i" e "u") | Flag: ⚠️ "Arredonde os lábios como 'u' mas diga 'i'" — same as French "u" |
+| "ö" /ø/ (schön) | "ê" (arredondado) | Flag: ⚠️ "Diga 'ê' com os lábios arredondados como 'ô'" |
+| "ä" /ɛ/ (Mädchen) | "é" (aberto) | Like Portuguese "é" in "café" |
+| "z" /ts/ (Zeit) | "ts" | Flag: always "ts", never "z" as in Portuguese |
+| "w" /v/ (Wasser) | "v" | German "w" = Portuguese "v" |
+| "v" /f/ (Vater) | "f" | Flag: German "v" usually sounds like "f" |
+| "s" initial /z/ (Sonne) | "z" | Voiced before vowels, like Portuguese "z" |
+| "ß" /s/ (Straße) | "ss" | Always voiceless "s" |
+| "r" /ʁ/ (rot) | "rr" (garganta) | Uvular, similar to French "r" |
+| "ei" /aɪ/ (ein) | "ai" | Like Portuguese "ai" in "vai" |
+| "eu/äu" /ɔʏ/ (heute) | "ói" | Flag: ⚠️ "Como 'ói' mas mais arredondado" |
+| "ie" /iː/ (Liebe) | "ii" (longo) | Long "i" sound |
+| final devoicing | voiceless | Flag: "d"→"t", "b"→"p", "g"→"k" at end of words |
+
+### Reference: pt-BR → Japanese
+
+| Japanese sound | pt-BR approximation | Notes |
+|----------------|---------------------|-------|
+| long vowels (おう, ああ) | doubled vowel | Flag: ⚠️ "Vogais longas mudam o significado — おばさん (tia) vs おばあさん (avó)" |
+| っ (geminate) | pausa + consoante | Flag: ⚠️ "Pequena pausa antes da consoante — きって (selo) vs きて (venha)" |
+| ん (n) | "n" or "m" or "ng" | Changes based on following sound: "m" before b/p, "ng" before k/g, "n" elsewhere |
+| "r" (ら行) | "r" (fraco) | Between Portuguese "r" (fraco) and "l" — single tongue tap |
+| "tsu" つ | "tsu" | Flag: ⚠️ "Não é 'tu' — a língua toca atrás dos dentes como 'ts'" |
+| "fu" ふ | "fu" (suave) | Flag: bilabial, softer than Portuguese "f" |
+| "shi" し | "shi" | Like Portuguese "x" in "xícara" + "i" |
+| "chi" ち | "tchi" | Like Portuguese "tch" in "tchau" + "i" |
+| pitch accent | varies | Flag: ⚠️ "Japonês tem acento de ALTURA (grave/agudo), não de intensidade" |
+
+### Reference: pt-BR → Korean
+
+| Korean sound | pt-BR approximation | Notes |
+|--------------|---------------------|-------|
+| ㅓ /ʌ/ | "ô" (aberto) | Flag: ⚠️ "Entre 'ó' e 'â' — mais aberto que 'ô' português" |
+| ㅡ /ɯ/ | "û" (sem arredondar) | Flag: ⚠️ "Como 'u' mas SEM arredondar os lábios" |
+| ㅐ /ɛ/ | "é" (aberto) | Like Portuguese "é" |
+| ㅔ /e/ | "ê" (fechado) | Like Portuguese "ê" — merging with ㅐ in modern Korean |
+| ㄱ (initial) /k/ | "k" (suave) | Flag: between "g" and "k" — unaspirated |
+| ㄲ (tense) /k͈/ | "k" (tenso) | Flag: ⚠️ "Tense/glottalized — pressione a garganta" |
+| ㅋ (aspirated) /kʰ/ | "k" (aspirado) | With strong puff of air |
+| 받침 (final consonant) | varies | Flag: ⚠️ "Consoante final é 'engolida' — não solte o ar" |
+| ㄹ (initial) /ɾ/ | "r" (fraco) | Single tap, like Portuguese intervocalic "r" |
+| ㄹ (final) /l/ | "l" | Flag: at end of syllable, sounds like "l" |
+| ㅎ /h/ | "r" (aspirado) | Softer than English "h", similar to weak Portuguese "r" |
+
 ### Pronunciation Traps
 
 Flag sounds that are systematically problematic for the user's `native_language`. Write trap explanations **in the native language** for maximum clarity.
@@ -477,6 +527,27 @@ Flag sounds that are systematically problematic for the user's `native_language`
 - **"c" and "g" before e/i**: Pronounced as affricates (cena = "tchena", gente = "djente"). Portuguese speakers may use their native "s" and "j" sounds instead
 - **No nasalization**: Italian has zero nasal vowels. Portuguese speakers must suppress nasalization completely (anno ≠ "ãno")
 - **Gemination in context**: Some words double consonants when prefixed (a + basso = abbasso). Missing the double changes meaning or sounds wrong
+
+#### Common traps: pt-BR → German
+- **Umlauts (ü/ö)**: These sounds do not exist in Portuguese. "ü" = lips of "u" with tongue of "i". "ö" = lips of "o" with tongue of "e". Most common pronunciation error for Romance language speakers
+- **"ch" sounds**: Two variants — "ich-Laut" (after front vowels/consonants: soft, like a whispered "sh") and "ach-Laut" (after back vowels: like throat "rr"). Portuguese speakers often use "sh" for both
+- **Final devoicing**: All voiced consonants become voiceless at end of words. "Hund" → "Hunt", "Tag" → "Tak". Portuguese speakers voice them
+- **"r" sound**: Standard German "r" is uvular (back of throat), similar to carioca "rr". NOT the English "r" and NOT a tongue trill
+- **Compound word stress**: Stress falls on the FIRST component. "HAUSaufgabe" not "HausAUFgabe". Long compounds need clear primary stress
+
+#### Common traps: pt-BR → Japanese
+- **Pitch accent**: Japanese does NOT use stress accent like Portuguese. It uses PITCH (high/low). "HAshi" (chopsticks) vs "haSHI" (bridge) — same syllables, different pitch patterns. Portuguese speakers impose stress patterns instead
+- **Vowel length**: Long vowels are phonemic. おばさん (obasan, aunt) vs おばあさん (obaasan, grandmother). Portuguese has no phonemic vowel length
+- **Geminate consonants (っ)**: A small pause before the consonant, lengthening it. きて (kite, come) vs きって (kitte, stamp). Portuguese has no geminate consonants
+- **"r" sound**: Japanese "r" is a single tongue tap (like Portuguese intervocalic "r" in "caro") but the tongue position is slightly different. NOT the Portuguese "rr"
+- **No stress**: Japanese words have no stressed syllable in the Portuguese sense. Each mora (beat) has equal duration. Portuguese speakers tend to reduce unstressed vowels
+
+#### Common traps: pt-BR → Korean
+- **Three-way consonant distinction**: Korean has plain (ㄱ), tense (ㄲ), and aspirated (ㅋ) versions of stops. Portuguese only has voiced/voiceless. The tense series requires glottal tension — no Portuguese equivalent
+- **ㅓ vs ㅗ**: ㅓ (eo) is an open-mid back vowel, ㅗ (o) is close-mid. Portuguese speakers hear both as "ô". Critical distinction
+- **ㅡ (eu)**: This unrounded back vowel does not exist in Portuguese. Say "u" but spread your lips flat instead of rounding
+- **받침 (final consonants)**: Korean final consonants are unreleased — the mouth closes but no air comes out. Portuguese speakers release them or add a vowel after
+- **Consonant assimilation**: When 받침 meets the next syllable, sounds change: ㄱ + ㄴ → "ngn", ㅂ + ㄹ → "mn". These rules are systematic and must be learned
 
 #### For other native languages
 

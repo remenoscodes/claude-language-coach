@@ -66,6 +66,9 @@ This is the most impactful contribution. Each language needs two template files 
 - Spanish: [`spanish-coaching.md`](plugins/claude-language-coach/skills/lang/templates/spanish-coaching.md), [`spanish-coaching.json`](plugins/claude-language-coach/skills/lang/templates/spanish-coaching.json)
 - French: [`french-coaching.md`](plugins/claude-language-coach/skills/lang/templates/french-coaching.md), [`french-coaching.json`](plugins/claude-language-coach/skills/lang/templates/french-coaching.json)
 - Italian: [`italian-coaching.md`](plugins/claude-language-coach/skills/lang/templates/italian-coaching.md), [`italian-coaching.json`](plugins/claude-language-coach/skills/lang/templates/italian-coaching.json)
+- German: [`german-coaching.md`](plugins/claude-language-coach/skills/lang/templates/german-coaching.md), [`german-coaching.json`](plugins/claude-language-coach/skills/lang/templates/german-coaching.json)
+- Japanese: [`japanese-coaching.md`](plugins/claude-language-coach/skills/lang/templates/japanese-coaching.md), [`japanese-coaching.json`](plugins/claude-language-coach/skills/lang/templates/japanese-coaching.json)
+- Korean: [`korean-coaching.md`](plugins/claude-language-coach/skills/lang/templates/korean-coaching.md), [`korean-coaching.json`](plugins/claude-language-coach/skills/lang/templates/korean-coaching.json)
 
 ## Commit conventions
 
