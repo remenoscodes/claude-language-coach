@@ -1,6 +1,6 @@
 ---
 name: language-coaching
-description: Ambient language coaching during coding sessions. Detects when a user writes in a non-native language and provides contextual grammar corrections, vocabulary suggestions, and false friend alerts without interrupting the main task.
+description: Ambient language coaching. Provides grammar corrections, vocabulary suggestions, and false friend alerts when the user writes in a non-native language.
 user-invocable: false
 ---
 
