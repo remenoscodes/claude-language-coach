@@ -71,6 +71,11 @@ If no config is found, the plugin still works:
 
 All coaching blocks use **backtick-wrapped delimiter lines** to create a visually framed card. This renders as inline code spans with a distinct background in Claude Code's terminal, providing clear visual separation from task content.
 
+**CRITICAL formatting rules:**
+- The top delimiter MUST have a space between the flag emoji and the language name: `` `🇪🇸 Español ───` `` NOT `` `🇪🇸Español ───` ``
+- The entire delimiter line (including flag, language name, and dashes) is wrapped in backticks
+- Keep content lines **concise** — if a correction has multiple fixes, use separate lines rather than one long wrapping line
+
 ### Correction Block (fixing a mistake)
 
 ```
