@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-02-22
+
+### Added
+- **SRS activation**: SM-2 spaced repetition scheduling for pattern reviews. After a correction, the pattern is scheduled for review. Correct usage extends the interval; re-errors reset it. Patterns resolve when interval reaches 21+ days with 5+ consecutive correct usages.
+- **SRS review block**: new lightweight coaching block format (`💭`) for scheduled reviews. Lower priority than corrections and teaching. Max 1 per response.
+- **Session auto-tracking**: every coaching interaction (correction, teaching, correct usage, SRS review) automatically upserts a session entry in the coaching JSON. Sessions tracked by date with project context.
+- **Session entry schema**: `date`, `project`, `patterns_addressed`, `new_patterns`, `patterns_correct`, `srs_reviews`, `vocabulary_taught`, `notes`
+- **SRS Schedule section** in markdown regeneration showing upcoming reviews with interval and ease factor
+- **README refresh**: feature matrix for 7 languages, SRS and session tracking sections, architecture explanation, updated contributing guide
+
+### Changed
+- CLAUDE.md coaching instructions expanded with SRS review protocol, session tracking, SRS review block format (~83 lines total)
+- `language-coaching` SKILL.md updated with full SM-2 algorithm specification, SRS review triggering logic, session auto-tracking upsert protocol
+- `lang` SKILL.md session writing now merges with ambient session data instead of overwriting
+- `setup` SKILL.md confirmation mentions SRS and session tracking
+- Hook nudge message includes session tracking and SRS review awareness
+- Contributing guide shifted from "add templates" to "refinement/features" focus
+
 ## [1.6.0] - 2026-02-22
 
 ### Added

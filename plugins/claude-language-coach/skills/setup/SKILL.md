@@ -224,6 +224,8 @@ Fill in all placeholders with the user's actual data.
 Summarize what was configured and tell the user:
 - Coaching is now active (ambient coaching works on every response)
 - The `UserPromptSubmit` hook reinforces coaching on every prompt
+- SRS is built-in: patterns are automatically scheduled for spaced review after corrections
+- Session tracking is automatic: every coaching interaction is logged for progress tracking
 - They can adjust settings by editing the config section or running this setup again
 - Use the `lang` skill for on-demand session reviews
 - Start a new session for the hook to take effect

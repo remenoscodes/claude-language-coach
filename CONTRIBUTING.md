@@ -12,9 +12,18 @@ cd claude-language-coach
 claude --plugin-dir ./plugins/claude-language-coach
 ```
 
+## Other contributions
+
+Beyond language templates, these areas could use help:
+
+- **Pronunciation tables for non-pt-BR native speakers** — the plugin ships with pt-BR reference tables; other native languages need their own
+- **SRS algorithm tuning** — interval parameters, ease factor decay, resolution thresholds
+- **Code-switching detection** — better heuristics for distinguishing intentional language mixing from errors
+- **Session analytics** — visualization or summary of learning progress over time
+
 ## Adding a new language template
 
-This is the most impactful contribution. Each language needs two template files and a review format block.
+All 7 planned languages (en, es, fr, it, de, ja, ko) are complete. To add support for a new language beyond these, each needs two template files and a review format block.
 
 ### Checklist
 

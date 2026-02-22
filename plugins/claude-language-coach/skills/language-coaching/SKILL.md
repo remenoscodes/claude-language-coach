@@ -254,6 +254,7 @@ After generating an active teaching block, update the JSON file:
 3. Update `stats.vocabulary_size` to match the length of the `vocabulary` array
 4. **Write** the updated JSON back
 5. **Regenerate** the markdown file from JSON
+6. **Update session**: follow the Session Auto-Tracking upsert protocol (add vocabulary ID to `vocabulary_taught`)
 
 ### On Correction (writing memory)
 
@@ -265,17 +266,30 @@ After generating a coaching block, update the JSON file:
    - Search existing patterns by `id`
    - If found: increment `times_corrected`, update `last_seen` to today, add to `examples` array (max 5, drop oldest if full)
    - If NOT found AND this is the first sighting ever: do NOT create a pattern entry yet. Patterns are only persisted after 2+ sightings.
-   - If NOT found AND you have seen this in a previous session (check the `.md` file or your own memory of this session): create a new pattern entry following the **Pattern Object Schema** above, with `times_corrected: 1`, `first_seen` and `last_seen` set to today, `resolved: false`, all SRS fields set to `null`, `times_correct_since_last_error: 0`, `last_correct_usage: null`
-3. Update the `stats` object: recalculate `patterns_active` and `total_corrections`
-4. **Write** the updated JSON back using the Write tool
-5. **Regenerate** the markdown file from the JSON (see Markdown Regeneration below)
+   - If NOT found AND you have seen this in a previous session (check the `.md` file or your own memory of this session): create a new pattern entry following the **Pattern Object Schema** above, with `times_corrected: 1`, `first_seen` and `last_seen` set to today, `resolved: false`, `ease_factor: 2.5`, `interval_days: null`, `next_review: null`, `times_correct_since_last_error: 0`, `last_correct_usage: null`
+3. **Update SRS fields** on the pattern:
+   - Set `next_review` to tomorrow (today + 1 day)
+   - Set `interval_days` to 1
+   - If `ease_factor` is null (first correction): set to 2.5
+   - If `ease_factor` is not null (re-error): set to `max(1.3, ease_factor - 0.2)`
+   - Reset `times_correct_since_last_error` to 0
+4. Update the `stats` object: recalculate `patterns_active` and `total_corrections`
+5. **Write** the updated JSON back using the Write tool
+6. **Regenerate** the markdown file from the JSON (see Markdown Regeneration below)
+7. **Update session**: follow the Session Auto-Tracking upsert protocol (add pattern ID to `patterns_addressed`)
 
 ### On Correct Usage (positive tracking)
 
 If you notice the user correctly using a construction that matches an active (non-resolved) pattern:
 1. Update the pattern: increment `times_correct_since_last_error`, set `last_correct_usage` to today
-2. If `times_correct_since_last_error` >= 5 AND more than 14 days since `last_seen`: set `resolved` to true, increment `stats.patterns_resolved`, decrement `stats.patterns_active`
-3. Write the updated JSON and regenerate the markdown
+2. **Progress SRS**: if `interval_days` is not null:
+   - Set `interval_days` to `ceil(interval_days * ease_factor)`
+   - Set `next_review` to today + `interval_days` days
+3. **Check resolution**: if `interval_days >= 21` AND `times_correct_since_last_error >= 5`:
+   - Set `resolved` to true, `next_review` to null, `interval_days` to null, `ease_factor` to null
+   - Increment `stats.patterns_resolved`, decrement `stats.patterns_active`
+4. Write the updated JSON and regenerate the markdown
+5. **Update session**: follow the Session Auto-Tracking upsert protocol (add pattern ID to `patterns_correct`)
 
 ### Pattern ID Rules
 
@@ -283,6 +297,93 @@ If you notice the user correctly using a construction that matches an active (no
 - The kebab-case part is 2-4 words describing the core error
 - Always lowercase, hyphens between words, underscores only in multi-word type prefixes (`false_friend`)
 - Examples: `grammar-didnt-plus-past`, `spelling-augumentar`, `false_friend-atualmente`, `preposition-in-vs-on-dates`
+
+### SRS (Spaced Repetition System)
+
+The SRS uses a modified SM-2 algorithm to schedule pattern reviews. SRS fields on each pattern: `next_review` (date string or null), `interval_days` (integer or null), `ease_factor` (float or null).
+
+#### Algorithm
+
+**On correction** (pattern error detected):
+- `next_review` = today + 1 day
+- `interval_days` = 1
+- `ease_factor` = 2.5 (if null, first correction) or `max(1.3, ease_factor - 0.2)` (re-error)
+- `times_correct_since_last_error` = 0
+
+**On correct usage** (user gets it right):
+- `interval_days` = `ceil(interval_days * ease_factor)`
+- `next_review` = today + `interval_days` days
+- If `interval_days >= 21` AND `times_correct_since_last_error >= 5` → mark `resolved`, clear SRS fields to null
+
+**Review scheduling**:
+- Due reviews = patterns where `next_review <= today` AND `resolved == false`
+- Pick the most overdue pattern (oldest `next_review`)
+- Max 1 SRS review block per response
+- Priority: correction > active teaching > SRS review
+- SRS review ONLY fires when no other coaching block is present in the response
+
+#### SRS Review Block Format
+
+Reviews use a lighter format to distinguish them from corrections:
+
+```
+`{flag} {Language} review ─────────────────────────────`
+💭 **{target_correction}** — last corrected {last_seen}. Recall: {explanation}
+`─────────────────────────────────────────────────`
+```
+
+After displaying an SRS review:
+- If the user subsequently uses the pattern correctly → treat as "On Correct Usage" (extend interval)
+- If the user makes the same error again → treat as "On Correction" (reset interval)
+- If no relevant usage occurs in the session → leave `next_review` as-is (it will trigger again next session)
+
+#### SRS Field Initialization
+
+When creating a NEW pattern entry (2nd sighting threshold met):
+- Set `ease_factor: 2.5` (not null — SRS is active from first persistence)
+- Set `interval_days: null` and `next_review: null` (these activate on first correction via "On Correction" logic)
+
+When a pattern has SRS fields all null and gets corrected for the first time:
+- This is the normal "On Correction" path — set `next_review`, `interval_days`, `ease_factor` as described above
+
+### Session Auto-Tracking
+
+After ANY coaching interaction (correction, active teaching, correct usage detection, or SRS review), update the session log.
+
+#### Session Entry Schema
+
+Every entry in the `sessions` array MUST use this structure:
+
+```json
+{
+  "date": "2026-02-22",
+  "project": "remenoscodes.match-os",
+  "patterns_addressed": ["grammar-didnt-plus-past"],
+  "new_patterns": [],
+  "patterns_correct": [],
+  "srs_reviews": 0,
+  "vocabulary_taught": ["desplegar"],
+  "notes": "1 correction, 1 vocabulary taught"
+}
+```
+
+#### Upsert Protocol
+
+1. **Read** the current JSON file
+2. **Find** an existing session entry where `date == today`
+3. **If found**: merge new data:
+   - Append pattern ID to `patterns_addressed` (deduplicate)
+   - Append new pattern ID to `new_patterns` (deduplicate)
+   - Append pattern ID to `patterns_correct` (deduplicate)
+   - Append vocabulary ID to `vocabulary_taught` (deduplicate)
+   - Increment `srs_reviews` if this was an SRS review interaction
+   - Regenerate `notes` as summary: "{N} corrections, {M} vocabulary taught, {K} SRS reviews"
+4. **If not found**: create a new entry with today's date
+   - Set `project` to the project directory name if identifiable from the working directory, otherwise `"general"`
+5. **Update stats**:
+   - `total_sessions` = count of entries in `sessions` array
+   - `last_session` = today's date
+6. **Write** the updated JSON and regenerate the markdown
 
 ### Markdown Regeneration
 
@@ -326,6 +427,10 @@ Active since: {active_since}
 {For each pattern where resolved=true:}
 - ~~{native_form}~~ — resolved {last_correct_usage} (was corrected {times_corrected}x)
 
+## SRS Schedule
+{For each pattern where next_review is not null and resolved is false:}
+- **{target_correction}** — next review: {next_review} (interval: {interval_days}d, ease: {ease_factor})
+
 ## Vocabulary Acquired in Context
 {For each vocabulary entry:}
 - **{target_term}** ({part_of_speech}{gender}) — {source_term} (taught {times_shown}x, used {times_used_by_user}x, since {first_taught})
@@ -339,6 +444,8 @@ Active since: {active_since}
 - Patterns corrected: {patterns_addressed count}
 - New patterns: {new_patterns count}
 - Correct usages: {patterns_correct count}
+- SRS reviews: {srs_reviews}
+- Vocabulary taught: {vocabulary_taught count}
 - {notes}
 
 ## Stats

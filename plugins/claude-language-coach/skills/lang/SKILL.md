@@ -27,14 +27,21 @@ The target language is: `$ARGUMENTS` (default to `en` if empty or not specified)
    - If it is new: create a new pattern entry in the JSON
 5. For known patterns that the user got RIGHT in this session:
    - Update `last_correct_usage`, increment `times_correct_since_last_error`
+   - Progress SRS: `interval_days = ceil(interval_days * ease_factor)`, `next_review = today + interval_days`
    - Mention this in Progress Notes as positive reinforcement
+5b. For patterns with active SRS (`next_review` is not null):
+   - Show the current SRS state in the review: interval, ease_factor, next_review
+   - If `next_review` has passed, flag it as "overdue for review"
+   - If reviewed and correct in this session, note the SRS progression
 6. For vocabulary entries reviewed or taught in this session:
    - If the entry has a `pronunciation` field: display it in the Pronunciation section
    - If the entry has NO `pronunciation` field (pre-v1.3.0 legacy): generate one following the Pronunciation Guidelines from the `language-coaching` skill, update the JSON entry with the new field, and display it
 7. Provide the review in the format below
 8. After the review, **write** the updated JSON file
 9. **Regenerate** the markdown file from the JSON (follow the Markdown Regeneration format from the language-coaching skill)
-10. Add a new entry to the `sessions` array with: `date`, `project` (if identifiable), `patterns_addressed`, `new_patterns`, `patterns_correct`, `vocabulary_used`, and `notes`
+10. Check if a session entry for today already exists in `sessions` (from ambient coaching).
+    - If yes: merge the review data into it. Append any newly discovered patterns to `patterns_addressed`, update `notes` to include "Session review performed"
+    - If no: create a new entry with: `date`, `project`, `patterns_addressed`, `new_patterns`, `patterns_correct`, `srs_reviews`, `vocabulary_taught`, `notes`
 11. Recalculate the `stats` object: `total_sessions`, `total_corrections` (sum of all pattern `times_corrected`), `patterns_resolved`, `patterns_active`, `vocabulary_size`, `last_session`
 
 ## Migration Protocol (md-to-json)
