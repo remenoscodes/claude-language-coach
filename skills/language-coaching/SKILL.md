@@ -98,7 +98,7 @@ If there is a false friend trap, append it to the 📝 line: `📝 {note} · ⚠
 
 The ⚠️ false friend warning is ONLY included when there is an actual false friend trap for the native→target language pair. Do not force it.
 
-Flag mapping: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語, 🇳🇱 Nederlands
+Flag mapping: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語, 🇰🇷 한국어, 🇳🇱 Nederlands
 
 ## Intensity Levels
 
