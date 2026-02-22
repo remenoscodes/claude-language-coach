@@ -26,25 +26,17 @@ You're working on a feature and write:
 
 Claude answers your question normally, then appends:
 
-```
-🇬🇧 English ──────────────────────────────────
-"how could I keep improving" — mixing hypothetical "could" with ongoing
-"keep improving" is a subtle mismatch. More natural:
-  - "how can I keep improving..." (general advice)
-  - "how could I improve..." (exploring possibilities)
-─────────────────────────────────────────────────
-```
+`🇬🇧 English ─────────────────────────────────────`
+"how could I keep improving" — mixing "could" with "keep improving" is a subtle mismatch. More natural: "how can I keep improving..." (advice) or "how could I improve..." (exploring)
+`─────────────────────────────────────────────────`
 
 Working on a deployment and Claude teaches you the Spanish term:
 
-```
-🇪🇸 Español ──────────────────────────────────
-💡 "deploy" → desplegar (v.)
-  🔊 "des-ple-GAR"
-  "We need to deploy to production" → "Necesitamos desplegar en producción"
-  📝 Regular -ar verb. Stem change: despliego, despliegas...
-─────────────────────────────────────────────────
-```
+`🇪🇸 Español ─────────────────────────────────────`
+**desplegar** (v.) — *deploy* · 🔊 "des-ple-GAR"
+"Necesitamos desplegar en producción"
+📝 Regular -ar verb. Stem change: despliego, despliegas...
+`─────────────────────────────────────────────────`
 
 The 🔊 line shows how the word sounds using your native language's syllables, with the stressed syllable in CAPS.
 

@@ -69,27 +69,29 @@ If no config is found, the plugin still works:
 
 ## Coaching Block Formats
 
+All coaching blocks use **backtick-wrapped delimiter lines** to create a visually framed card. This renders as inline code spans with a distinct background in Claude Code's terminal, providing clear visual separation from task content.
+
 ### Correction Block (fixing a mistake)
 
 ```
-{flag} {Language} ──────────────────────────────────
-[2-3 lines max. One correction or suggestion per block.]
-─────────────────────────────────────────────────
+`{flag} {Language} ─────────────────────────────────────`
+[1-2 lines. One correction or suggestion per block.]
+`─────────────────────────────────────────────────`
 ```
 
 ### Active Teaching Block (teaching from context)
 
 ```
-{flag} {Language} ──────────────────────────────────
-💡 "{source_term}" → {translation} ({part_of_speech})
-  🔊 "{native_language phonetic approximation}"
-  "{English sentence from context}" → "{Target language translation}"
-  📝 {Grammar/usage note}
-  ⚠️ pt "{false_friend}" ≠ {target_lang} "{actual_word}" (only if applicable)
-─────────────────────────────────────────────────
+`{flag} {Language} ─────────────────────────────────────`
+**{target_term}** ({part_of_speech}) — *{source_term}* · 🔊 "{native_language phonetic approximation}"
+"{Target language contextual sentence}"
+📝 {Grammar/usage note}
+`─────────────────────────────────────────────────`
 ```
 
-The ⚠️ false friend line is ONLY included when there is an actual false friend trap for the native→target language pair. Do not force it.
+If there is a false friend trap, append it to the 📝 line: `📝 {note} · ⚠️ pt "{false_friend}" ≠ {target_lang} "{actual_word}"`
+
+The ⚠️ false friend warning is ONLY included when there is an actual false friend trap for the native→target language pair. Do not force it.
 
 Flag mapping: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語
 
