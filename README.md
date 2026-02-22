@@ -41,6 +41,7 @@ language-coaching skill (500+ lines) ← detailed reference, invoked on demand
 |-------|------|-------------|
 | `language-coaching` | Reference | Detailed schemas, pronunciation tables, SRS algorithm (invoked on demand) |
 | `/claude-language-coach:lang` | On-demand | Full session review of your language usage |
+| `/claude-language-coach:progress` | On-demand | Longitudinal progress report with metrics, trends, and insights |
 | `/claude-language-coach:setup` | On-demand | Interactive setup — writes config + instructions to CLAUDE.md |
 
 ### Example
@@ -133,6 +134,8 @@ claude --plugin-dir ./claude-language-coach
 |--------|---------|
 | Session review (English) | `/claude-language-coach:lang en` |
 | Session review (all) | `/claude-language-coach:lang all` |
+| Progress report | `/claude-language-coach:progress` |
+| Progress report (one lang) | `/claude-language-coach:progress es` |
 | Customize preferences | `/claude-language-coach:setup` |
 | Ambient coaching | Automatic (no command needed) |
 
