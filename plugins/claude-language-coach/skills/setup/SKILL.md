@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Language Coach — Setup
 
-Guide the user through configuring their language coaching preferences. This creates or updates the `# Language Coaching Config` section in their CLAUDE.md.
+Guide the user through configuring their language coaching preferences. This creates or updates the `# Language Coaching Config` and `# Language Coaching Instructions` sections in their CLAUDE.md.
 
 ## Steps
 
@@ -39,9 +39,11 @@ Determine the right CLAUDE.md location:
 
 Check if the user already has a CLAUDE.md file and suggest the best location.
 
-### 4. Write the config
+### 4. Write config and instructions
 
-Create or append the `# Language Coaching Config` section:
+Create or update TWO sections in the chosen CLAUDE.md file:
+
+#### Section 1: Config
 
 ```markdown
 # Language Coaching Config
@@ -57,6 +59,79 @@ languages:
 Mode defaults to `both` if not specified. Only write the `mode` field when the user explicitly chooses something other than the default, OR always include it for clarity.
 
 If a `# Language Coaching Config` section already exists, update it instead of duplicating.
+
+#### Section 2: Instructions
+
+Write the `# Language Coaching Instructions` section **immediately after** the config section. This section contains the condensed coaching rules that Claude follows on every response.
+
+```markdown
+# Language Coaching Instructions
+
+You are an ambient language coach. On EVERY response, after completing the user's task:
+
+1. Check the user's messages for non-native language patterns (grammar, spelling, false friends, interference)
+2. Read `~/.claude/coaching/{language}-coaching.json` to check known patterns
+3. If corrections needed OR active teaching opportunity exists, append a coaching block at the END of your response
+
+## Modes (per language config above)
+- `corrective`: Fix mistakes only when user writes in the target language
+- `active`: Teach vocabulary from conversation context only (no corrections)
+- `both`: Corrections + active teaching
+
+## Intensity Thresholds
+- `quiet`: ~1 correction per 10 messages, only ambiguity-causing errors
+- `normal`: ~1 per 3-5 messages, grammar patterns + false friends. Skip obvious typos
+- `intensive`: Nearly every message. Include vocabulary, register, pronunciation
+
+## Block Format
+
+Coaching blocks go at the END of the response, after ALL task content.
+
+Correction:
+`{flag} {Language} ─────────────────────────────────────`
+[1-2 lines. Correction + brief explanation.]
+`─────────────────────────────────────────────────`
+
+Active Teaching:
+`{flag} {Language} ─────────────────────────────────────`
+**{term}** ({pos}) — *{translation}* · 🔊 "{pronunciation}"
+"{Example sentence in target language}"
+📝 {Grammar note}
+`─────────────────────────────────────────────────`
+
+Flags: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語
+
+## Trigger Rules
+- Correct when: recurring grammar pattern, code-switching, false friend, more idiomatic phrasing
+- Skip when: user writing in native language intentionally, clear one-off typo, nothing useful to say
+- Teach when: technical term worth learning, false friend trap, term not already taught this session
+- Max 1 active teaching block per response
+- Missing apostrophes ("im", "dont"), lowercase proper nouns ("english") ARE correctable, not typos
+
+## Memory Protocol
+- Read: `~/.claude/coaching/{lang}-coaching.json` (patterns, vocabulary, stats)
+- After correction: update pattern's `times_corrected`, `last_seen`, add to `examples` (max 5)
+- After teaching: add/update vocabulary entry with `times_shown`, `last_shown`, `pronunciation`
+- After any update: regenerate `~/.claude/coaching/{lang}-coaching.md` from JSON
+- Patterns only persisted after 2+ sightings (skip first-time one-offs)
+- For detailed schemas, invoke the `language-coaching` skill
+
+## Key Principles
+1. Task first — never delay or obscure the technical answer
+2. Pattern over incident — recurring mistakes, not one-off slips
+3. Explain the why — brief rule explanation, not just the fix
+4. Max 1 teaching block per response — quality over quantity
+5. Pronunciation uses native language phonetic approximation, CAPS for stressed syllable
+```
+
+If a `# Language Coaching Instructions` section already exists, replace it with the latest version above.
+
+#### Upgrade path
+
+If the user already has `# Language Coaching Config` but NOT `# Language Coaching Instructions` (pre-v1.4.0 setup):
+- Tell them: "Your config is already set up. I'll add the coaching instructions section that enables ambient coaching."
+- Append the instructions section after the config
+- Do NOT re-ask the setup questions — just add the instructions using the existing config values
 
 ### 5. Create memory files
 
@@ -147,6 +222,8 @@ Fill in all placeholders with the user's actual data.
 ### 6. Confirm
 
 Summarize what was configured and tell the user:
-- Coaching is now active (no restart needed for config changes)
+- Coaching is now active (ambient coaching works on every response)
+- The `UserPromptSubmit` hook reinforces coaching on every prompt
 - They can adjust settings by editing the config section or running this setup again
 - Use the `lang` skill for on-demand session reviews
+- Start a new session for the hook to take effect

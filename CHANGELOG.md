@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-02-22
+
+### Added
+- **UserPromptSubmit hook**: injects a coaching nudge on every user prompt, reminding Claude to check for language patterns and provide coaching blocks. This ensures ambient coaching fires reliably.
+- **Condensed coaching instructions for CLAUDE.md**: the `/setup` skill now writes both the config YAML and a `# Language Coaching Instructions` section (~45 lines) to CLAUDE.md. These instructions are always in Claude's context, enabling true ambient coaching.
+- **Upgrade path**: existing users with pre-v1.4.0 config can run `/setup` to add the instructions section without re-entering their preferences.
+
+### Changed
+- **Architecture**: ambient coaching no longer relies solely on the `language-coaching` skill being invoked. The primary mechanism is now CLAUDE.md instructions (always in context) + UserPromptSubmit hook (reinforcement on every prompt). The full `language-coaching` SKILL.md remains as a detailed reference for schemas and pronunciation tables.
+- Setup skill confirmation step now mentions the hook and recommends starting a new session for it to take effect.
+
+### Fixed
+- Ambient coaching not firing despite correct configuration (root cause: `user-invocable: false` skills only load their one-line description into context, not the full SKILL.md instructions)
+
 ## [1.3.1] - 2026-02-22
 
 ### Fixed

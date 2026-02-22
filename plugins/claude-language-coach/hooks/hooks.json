@@ -1,0 +1,16 @@
+{
+  "description": "Language coaching nudge on every user prompt",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/coaching-nudge.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

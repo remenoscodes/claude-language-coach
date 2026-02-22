@@ -17,6 +17,9 @@ jobs:
       - name: Validate plugin.json syntax
         run: python3 -c "import json; json.load(open('plugins/claude-language-coach/.claude-plugin/plugin.json'))"
 
+      - name: Validate hooks.json syntax
+        run: python3 -c "import json; json.load(open('plugins/claude-language-coach/hooks/hooks.json'))"
+
       - name: Validate JSON templates
         run: |
           for f in plugins/claude-language-coach/skills/lang/templates/*.json; do

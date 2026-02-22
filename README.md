@@ -8,15 +8,31 @@ Ambient language coaching for [Claude Code](https://code.claude.com). Learn lang
 
 ## How it works
 
-Install the plugin and start coding. The plugin auto-detects when you're writing in a non-native language and provides lightweight coaching at the end of responses. No configuration required.
+Install the plugin and run `/claude-language-coach:setup`. The setup writes coaching instructions to your CLAUDE.md (always in Claude's context) and a lightweight hook nudges Claude on every prompt. Result: ambient coaching that actually fires on every response.
+
+### Architecture
+
+```
+CLAUDE.md (always in context)          UserPromptSubmit hook (every prompt)
+┌─────────────────────────┐           ┌──────────────────────────────┐
+│ Config + Instructions    │           │ Short nudge: "coaching is    │
+│ (~55 lines)              │           │ active, check for patterns"  │
+└──────────┬──────────────┘           └──────────────┬───────────────┘
+           └──────────── Claude sees both ────────────┘
+                              │
+                   ┌──────────▼──────────┐
+                   │ Coaching blocks at  │
+                   │ end of responses    │
+                   └─────────────────────┘
+```
 
 ### Skills
 
 | Skill | Type | Description |
 |-------|------|-------------|
-| `language-coaching` | Background | Auto-detects non-native writing, appends coaching blocks |
+| `language-coaching` | Reference | Detailed schemas, pronunciation tables, edge cases (invoked on demand) |
 | `/claude-language-coach:lang` | On-demand | Full session review of your language usage |
-| `/claude-language-coach:setup` | On-demand | Interactive setup to customize your preferences |
+| `/claude-language-coach:setup` | On-demand | Interactive setup — writes config + instructions to CLAUDE.md |
 
 ### Example
 
@@ -49,31 +65,31 @@ The 🔊 line shows how the word sounds using your native language's syllables, 
 /plugin install claude-language-coach
 ```
 
-That's it. The plugin works immediately with smart defaults:
-- Auto-detects your native language from writing patterns
-- Coaches at `normal` intensity (~1 correction per 3-5 messages)
-- Supports any language pair
-
-### Customize (optional)
-
-Run the interactive setup to fine-tune your preferences:
+Then run the setup to activate ambient coaching:
 
 ```
 /claude-language-coach:setup
 ```
 
-This guides you through choosing your native language, target languages, intensity levels, and sets up progress tracking.
+This writes coaching instructions to your CLAUDE.md and sets up progress tracking. The `UserPromptSubmit` hook starts working immediately after plugin install.
+
+### Customize (optional)
+
+The setup guides you through choosing your native language, target languages, intensity levels, coaching modes, and progress tracking. For zero-config, the plugin still auto-detects your native language from writing patterns if no config is found.
 
 ### Manual (standalone)
 
-Clone the repo and copy the plugin skills into your personal Claude config:
+Clone the repo and copy the plugin skills and hooks into your personal Claude config:
 
 ```bash
 git clone https://github.com/remenoscodes/claude-language-coach.git
 cp -r claude-language-coach/plugins/claude-language-coach/skills/* ~/.claude/skills/
+cp -r claude-language-coach/plugins/claude-language-coach/hooks ~/.claude/hooks/
 ```
 
 With manual installation, skills use short names (`/lang`, `/setup` instead of `/claude-language-coach:lang`, `/claude-language-coach:setup`).
+
+After copying, run `/setup` to write the coaching instructions to your CLAUDE.md.
 
 ### Local development
 
@@ -116,7 +132,7 @@ languages:
     intensity: intensive
 ```
 
-Or run `/claude-language-coach:setup` to create this interactively.
+**Important**: the config alone is not enough for ambient coaching. You also need the `# Language Coaching Instructions` section. Run `/claude-language-coach:setup` to generate both sections automatically.
 
 ### Supported options
 
