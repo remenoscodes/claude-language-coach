@@ -20,6 +20,7 @@ Ask which languages they want coaching for. For each language, ask:
 - **Level**: beginner, intermediate, or advanced
 - **Intensity**: quiet, normal, or intensive
 - **Mode**: corrective, active, or both
+- **Immersion**: phrase, sentence, or none
 
 Explain the intensity levels briefly:
 - `quiet` — only errors that cause confusion (~1 per 10 messages)
@@ -30,6 +31,11 @@ Explain the coaching modes briefly:
 - `corrective` — only fix mistakes when you write in the target language
 - `active` — teach vocabulary from your conversations, even when writing in other languages
 - `both` (recommended) — corrections + active vocabulary teaching
+
+Explain immersion briefly:
+- `phrase` (recommended for active learners) — on every response, translate a key phrase from your message to the target language. Great for building vocabulary from your actual thoughts.
+- `sentence` — same as phrase, but translates a full sentence. More exposure, but longer cards.
+- none (default) — no immersion cards, use regular active teaching frequency instead
 
 ### 3. Ask where to save config
 
@@ -54,9 +60,12 @@ languages:
     level: {level}
     intensity: {intensity}
     mode: {mode}
+    immersion: {immersion}   # omit if none/not selected
 ```
 
 Mode defaults to `both` if not specified. Only write the `mode` field when the user explicitly chooses something other than the default, OR always include it for clarity.
+
+Immersion defaults to none (absent). Only write the `immersion` field when the user explicitly selects `phrase` or `sentence`.
 
 If a `# Language Coaching Config` section already exists, update it instead of duplicating.
 
@@ -99,26 +108,43 @@ Active Teaching:
 📝 {Grammar note}
 `─────────────────────────────────────────────────`
 
-SRS Review (lighter, only when no correction/teaching fires):
+Immersion (when `immersion: phrase` or `immersion: sentence` is configured — fires EVERY response):
+`{flag} {Language} · inmersión ────────────────────────`
+💬 "{user's phrase/sentence in original language}"
+→ **"{natural translation in target language}"**
+🔑 **{key_term}** ({pos}) — *{source_term}* · 🔊 "{pronunciation}"
+📝 {Grammar/construction note}
+`─────────────────────────────────────────────────`
+
+SRS Review (lighter, only when no correction/teaching/immersion fires):
 `{flag} {Language} review ─────────────────────────────`
 💭 **{correct form}** — last corrected {date}. Recall: {explanation}
 `─────────────────────────────────────────────────`
 
 Flags: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語, 🇰🇷 한국어, 🇳🇱 Nederlands
 
+## Immersion
+- When `immersion: phrase` — pick the most educational phrase (3-8 words) from user's message, translate to target language
+- When `immersion: sentence` — translate the most substantial full sentence from user's message
+- Fires on EVERY response regardless of intensity settings
+- Replaces active teaching and SRS review for that language (immersion is a superset)
+- Coexists with corrections (both can appear in same response)
+- SRS-aware: preferentially pick phrases containing vocabulary due for SRS review
+- Track the 🔑 key term in vocabulary memory (same protocol as active teaching)
+
 ## Trigger Rules
 - Correct when: recurring grammar pattern, code-switching, false friend, more idiomatic phrasing
 - Skip when: user writing in native language intentionally, clear one-off typo, nothing useful to say
-- Teach when: technical term worth learning, false friend trap, term not already taught this session
+- Teach when: technical term worth learning, false friend trap, term not already taught this session (only for languages WITHOUT immersion)
 - Max 1 active teaching block per response
 - Missing apostrophes ("im", "dont"), lowercase proper nouns ("english") ARE correctable, not typos
-- Priority: correction > teaching > SRS review. SRS review ONLY fires when no other coaching block present
-- If a pattern's `next_review` date has passed, fire an SRS review block (max 1/response)
+- Priority: correction > immersion > teaching > SRS review. SRS review ONLY fires when no other coaching block present
+- If a pattern's `next_review` date has passed, fire an SRS review block (max 1/response) — unless immersion is active for that language
 
 ## Memory Protocol
 - Read: `~/.claude/coaching/{lang}-coaching.json` (patterns, vocabulary, stats)
 - After correction: update pattern's `times_corrected`, `last_seen`, add to `examples` (max 5)
-- After teaching: add/update vocabulary entry with `times_shown`, `last_shown`, `pronunciation`
+- After teaching or immersion: add/update vocabulary entry with `times_shown`, `last_shown`, `pronunciation`
 - After any update: regenerate `~/.claude/coaching/{lang}-coaching.md` from JSON
 - Patterns only persisted after 2+ sightings (skip first-time one-offs)
 - After any coaching interaction: upsert session entry for today in `sessions` array (merge by date). Update `stats.total_sessions` and `stats.last_session`
@@ -133,7 +159,7 @@ Flags: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch
 1. Task first — never delay or obscure the technical answer
 2. Pattern over incident — recurring mistakes, not one-off slips
 3. Explain the why — brief rule explanation, not just the fix
-4. Max 1 teaching block per response — quality over quantity
+4. Max 1 teaching/immersion block per response per language — quality over quantity
 5. Pronunciation uses native language phonetic approximation, CAPS for stressed syllable
 ```
 

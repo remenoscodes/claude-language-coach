@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-02-22
+
+### Added
+- **Immersion mode**: new `immersion` config field per language (`phrase` or `sentence`). When enabled, a translation card fires on **every response**, translating a key phrase or sentence from the user's message into the target language. Includes key vocabulary term with pronunciation and grammar notes.
+- **Immersion block format**: new `{flag} {Language} · inmersión` card with 💬 source phrase, → translation, 🔑 key term, and 📝 grammar note
+- **SRS-aware immersion**: when a vocabulary term is due for SRS review, immersion cards preferentially select phrases containing that term for natural reinforcement
+- **Setup skill updated**: immersion option added to the interactive setup flow (`phrase`, `sentence`, or none)
+
+### Changed
+- **Priority order updated**: correction > immersion > active teaching > SRS review
+- When immersion is enabled for a language, it replaces active teaching and SRS review (immersion is a superset)
+- Correction blocks coexist with immersion blocks (both can appear in the same response)
+
 ## [1.8.0] - 2026-02-22
 
 ### Added

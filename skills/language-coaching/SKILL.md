@@ -47,6 +47,7 @@ languages:
     level: beginner
     intensity: intensive
     mode: both           # fix mistakes AND teach vocabulary
+    immersion: phrase    # translate user's phrases to target language on EVERY response
 ```
 
 ### Mode values
@@ -56,6 +57,21 @@ languages:
 - **`active`** — Only teach vocabulary from context. No corrections. Useful for passive exposure without pressure.
 
 If `mode` is not specified in the config, it defaults to `both`.
+
+### Immersion values
+
+Immersion adds a translation card on **every response**, regardless of what language the user writes in. It picks a phrase or sentence from the user's message and shows how to say it in the target language.
+
+- **`phrase`** (recommended) — Pick the most educational phrase (3-8 words) from the user's message and translate it. Best balance of learning density and card size.
+- **`sentence`** — Translate the most substantial full sentence from the user's message. More exposure per card, but longer.
+- **`false`** or absent — No immersion (default, backwards-compatible).
+
+When immersion is enabled:
+- It fires on **every response**, overriding intensity frequency limits for that language.
+- It **replaces active teaching** for that language (immersion is a superset — it teaches vocabulary within phrase context).
+- It **replaces SRS review** for that language (constant exposure makes scheduled reviews redundant).
+- It **coexists with corrections** — if the user writes in the target language and makes a mistake, both a correction block and an immersion block appear.
+- It is **SRS-aware**: when a vocabulary term is due for SRS review, the immersion card preferentially selects a phrase containing that term for natural reinforcement.
 
 ### Without config (smart defaults)
 
@@ -98,6 +114,35 @@ If there is a false friend trap, append it to the 📝 line: `📝 {note} · ⚠
 
 The ⚠️ false friend warning is ONLY included when there is an actual false friend trap for the native→target language pair. Do not force it.
 
+### Immersion Block (ambient phrase/sentence translation)
+
+Only appears when `immersion` is configured for the language. Fires on **every response**.
+
+```
+`{flag} {Language} · inmersión ────────────────────────`
+💬 "{user's phrase/sentence in original language}"
+→ **"{natural translation in target language}"**
+🔑 **{key_term}** ({part_of_speech}) — *{source_term}* · 🔊 "{pronunciation}"
+📝 {Grammar/construction note about the translation}
+`─────────────────────────────────────────────────`
+```
+
+The immersion block has 4 content lines:
+1. **💬 Source**: the phrase or sentence selected from the user's message, in their original language
+2. **→ Translation**: a natural (not word-for-word) translation in the target language, bolded
+3. **🔑 Key term**: one vocabulary item extracted from the translation, with part of speech, source equivalent, and pronunciation
+4. **📝 Grammar note**: explains a grammar point, verb conjugation, or construction used in the translation
+
+**Phrase mode** (`immersion: phrase`):
+- Pick the most substantive/educational phrase (3-8 words) from the user's message
+- Prefer phrases containing: verbs, technical terms, expressions — not filler words
+- If the message is very short ("ok", "yes", "thanks"), pick from the conversation context instead
+
+**Sentence mode** (`immersion: sentence`):
+- Pick the most substantial complete sentence from the user's message
+- If the message has multiple sentences, pick the one with the richest vocabulary for learning
+- Translate naturally — adapt idioms and structure to the target language
+
 Flag mapping: 🇬🇧 English, 🇪🇸 Español, 🇫🇷 Français, 🇩🇪 Deutsch, 🇮🇹 Italiano, 🇯🇵 日本語, 🇰🇷 한국어, 🇳🇱 Nederlands
 
 ## Intensity Levels
@@ -138,7 +183,32 @@ A correction block SHOULD NOT appear when:
 
 **IMPORTANT**: Do not use the typo exception as a reason to skip corrections. When in doubt, correct. Missing apostrophes ("im", "dont", "cant"), lowercase proper nouns ("english", "spanish", "javascript"), and missing punctuation are all correctable at `normal` and `intensive` intensity. The typo exception is narrowly for single-character transpositions that are clearly accidental, not for systematic shortcuts.
 
+### Immersion Triggers
+
+When `immersion` is configured for a language, the immersion block fires on **every response** — no frequency limits apply.
+
+An immersion block SHOULD appear when:
+1. The language has `immersion: phrase` or `immersion: sentence` configured
+2. The user sent a message (any language — native, target, or other)
+
+An immersion block SHOULD NOT appear when:
+1. The response is purely a system/error message with no conversational content
+2. The user's message consists solely of a tool command (e.g., `/help`, `/commit`) with no natural language
+
+**SRS-aware selection**: When a vocabulary term from the `vocabulary` array has `next_review <= today`, preferentially select a phrase from the user's message that contains or relates to that term's `source_term`. This provides natural spaced repetition within the immersion flow.
+
+**Key term (🔑) selection for immersion cards** follows the same priority as active teaching:
+1. **False friend traps** — highest value
+2. **Domain-relevant verbs** — actionable, repeated
+3. **Technical nouns** — contextual, memorable
+4. **Expressions/idioms** — cultural equivalents
+5. **General vocabulary** — directly relevant to the phrase
+
+Prefer terms NOT already in the `vocabulary` array. If all terms in the phrase are already taught, pick the one with the lowest `times_shown` for reinforcement.
+
 ### Active Teaching Triggers
+
+**NOTE**: When `immersion` is enabled for a language, active teaching is **replaced** by immersion for that language. The immersion block is a superset — it teaches vocabulary within phrase context. Active teaching triggers below only apply to languages WITHOUT immersion configured.
 
 An active teaching block SHOULD appear when:
 1. The conversation contains a **technical term** worth learning in the target language (e.g., "deploy", "authentication", "database")
@@ -161,11 +231,22 @@ Pick terms that maximize learning value. In priority order:
 4. **Expressions/idioms** — "ship it", "looks good to me" → target equivalent (cultural)
 5. **General vocabulary** — only when directly relevant to the conversation
 
-## Placement
+## Placement and Priority
 
 - Coaching blocks go **at the end** of the response, after ALL task-related content
 - They come **after** any other supplementary blocks if both are present
 - Never let coaching interrupt the flow of a technical answer
+
+### Block priority order
+
+1. **Correction** — if the user wrote in the target language and made a mistake
+2. **Immersion** — if `immersion` is configured (fires every response, can coexist with correction)
+3. **Active teaching** — if no immersion is configured for the language (frequency-limited by intensity)
+4. **SRS review** — only fires when no other coaching block is present for that language
+
+When immersion is enabled for a language:
+- Correction + Immersion can **both** appear in the same response
+- Active teaching and SRS review are **suppressed** for that language (immersion replaces both)
 
 ## Memory: Read and Write Protocol
 
@@ -256,6 +337,20 @@ After generating an active teaching block, update the JSON file:
 5. **Regenerate** the markdown file from JSON
 6. **Update session**: follow the Session Auto-Tracking upsert protocol (add vocabulary ID to `vocabulary_taught`)
 
+### On Immersion (writing memory)
+
+After generating an immersion block, update the JSON file using the **same protocol as active teaching** for the 🔑 key term:
+
+1. **Read** the current JSON file (re-read to avoid stale data)
+2. **Find or create** the vocabulary entry for the 🔑 key term:
+   - Search by `id` (target term lowercase)
+   - If found: increment `times_shown`, update `last_shown`
+   - If NOT found: create a new entry following the **Vocabulary Object Schema** above. Use the immersion phrase as the `example_source`/`example_target` pair.
+3. Update `stats.vocabulary_size` to match the length of the `vocabulary` array
+4. **Write** the updated JSON back
+5. **Regenerate** the markdown file from JSON
+6. **Update session**: follow the Session Auto-Tracking upsert protocol (add vocabulary ID to `vocabulary_taught`)
+
 ### On Correction (writing memory)
 
 After generating a coaching block, update the JSON file:
@@ -319,8 +414,9 @@ The SRS uses a modified SM-2 algorithm to schedule pattern reviews. SRS fields o
 - Due reviews = patterns where `next_review <= today` AND `resolved == false`
 - Pick the most overdue pattern (oldest `next_review`)
 - Max 1 SRS review block per response
-- Priority: correction > active teaching > SRS review
-- SRS review ONLY fires when no other coaching block is present in the response
+- Priority: correction > immersion > active teaching > SRS review
+- SRS review ONLY fires when no other coaching block is present in the response for that language
+- **When immersion is enabled**: SRS review blocks are suppressed for that language. Instead, immersion cards preferentially select phrases containing SRS-due terms for natural reinforcement (see Immersion Triggers).
 
 #### SRS Review Block Format
 
