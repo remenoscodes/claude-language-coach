@@ -52,23 +52,28 @@ You're working on a feature and write:
 
 Claude answers your question normally, then appends:
 
-`🇬🇧 English ─────────────────────────────────────`
-**"it hasn't any error"** — **"doesn't it have any errors"** — In English, *have* as a main verb needs the *do* auxiliary for negation: *doesn't have*. Also, *any* + countable noun = plural (*errors*).
-`─────────────────────────────────────────────────`
+> 🇬🇧 **English** <br>
+> **"it hasn't any error"** → **"doesn't it have any errors"** — In English, *have* as a main verb needs the *do* auxiliary for negation: *doesn't have*. Also, *any* + countable noun = plural (*errors*).
 
 Working on a deployment and Claude teaches you the Spanish term:
 
-`🇪🇸 Español ─────────────────────────────────────`
-**desplegar** (v.) — *deploy* · 🔊 "des-ple-GAR"
-"Necesitamos desplegar en producción"
-📝 Regular -ar verb. Stem change: despliego, despliegas...
-`─────────────────────────────────────────────────`
+> 🇪🇸 **Español** <br>
+> **desplegar** (v.) — *deploy* · 🔊 "des-ple-GAR" <br>
+> "Necesitamos desplegar en producción" <br>
+> 📝 Regular -ar verb. Stem change: despliego, despliegas...
 
 A pattern you corrected before comes up for review:
 
-`🇬🇧 English review ─────────────────────────────`
-💭 **didn't work** — last corrected 2026-02-20. Recall: after "didn't", use the base form (not past tense)
-`─────────────────────────────────────────────────`
+> 🇬🇧 **English** · review <br>
+> 💭 **didn't work** — last corrected 2026-02-20. Recall: after "didn't", use the base form (not past tense)
+
+With immersion mode enabled, Claude translates a phrase from your message into the target language:
+
+> 🇪🇸 **Español** · inmersión <br>
+> 💬 "let's close the session for now" <br>
+> → **"cerremos la sesión por ahora"** <br>
+> 🔑 **cerrar** (verbo) — *fechar/encerrar* · 🔊 "se-RRAR" <br>
+> 📝 "Cerremos" uses the *nosotros* subjunctive for "let's..." commands.
 
 ## Supported languages
 
@@ -162,6 +167,7 @@ languages:
     level: beginner
     intensity: intensive
     mode: both
+    immersion: phrase
 ```
 
 **Important**: the config alone is not enough for ambient coaching. You also need the `# Language Coaching Instructions` section. Run `/claude-language-coach:setup` to generate both sections automatically.
@@ -175,6 +181,7 @@ languages:
 | `level` | `beginner`, `intermediate`, `advanced` | Your current level |
 | `intensity` | `quiet`, `normal`, `intensive` | How often coaching appears |
 | `mode` | `corrective`, `active`, `both` | Corrections only, vocabulary only, or both (default: `both`) |
+| `immersion` | `phrase`, `sentence`, (none) | Translate phrases/sentences from your messages into the target language every response |
 
 ### Intensity levels
 
@@ -188,17 +195,29 @@ languages:
 - **`active`** — Teach vocabulary from conversation context. No corrections. Useful for passive exposure.
 - **`both`** (default) — Corrections + active vocabulary teaching. Best for actively learning a language.
 
+### Immersion mode
+
+When `immersion` is set on a language, Claude translates a phrase or sentence from your message into the target language on every response.
+
+- **`phrase`** — Picks the most educational 3-8 word phrase from your message
+- **`sentence`** — Translates the most substantial full sentence
+
+Immersion fires every response regardless of intensity settings. It replaces active teaching and SRS review for that language (it's a superset — you get vocabulary acquisition through translation context). Corrections still coexist with immersion, so errors get flagged even when immersion is active.
+
+The system is SRS-aware: it preferentially picks phrases containing vocabulary due for spaced repetition review, reinforcing terms you're actively learning.
+
 ## Features
 
 ### Ambient coaching
 
-The plugin monitors your messages for non-native patterns and appends coaching blocks at the end of responses. Three block types:
+The plugin monitors your messages for non-native patterns and appends coaching blocks at the end of responses. Four block types:
 
 - **Correction blocks** — Fix grammar, spelling, false friends, interference patterns
+- **Immersion blocks** — Translate phrases/sentences from your messages into the target language with pronunciation
 - **Active teaching blocks** — Teach vocabulary from conversation context with pronunciation
 - **SRS review blocks** — Lightweight reminders for previously corrected patterns
 
-Priority: correction > teaching > SRS review. Max 1 of each type per response.
+Priority: correction > immersion > teaching > SRS review. Max 1 block per type per response. Immersion replaces teaching and SRS review when enabled for a language.
 
 ### Pronunciation coaching
 
@@ -224,13 +243,12 @@ When you make a mistake, the plugin schedules a review using the SM-2 algorithm:
 - **Re-error**: interval resets to 1 day, ease factor decreases
 - **Mastery**: when interval reaches 21+ days with 5+ consecutive correct usages, the pattern is marked resolved
 
+Patterns are only persisted after their second sighting — first-time errors are treated as one-offs and won't clutter your progress tracking.
+
 Review blocks are lighter than corrections — they remind without disrupting:
 
-```
-🇬🇧 English review ─────────────────────────────
-💭 didn't work — last corrected 2026-02-20. Recall: after "didn't", use the base form
-─────────────────────────────────────────────────
-```
+> 🇬🇧 **English** · review <br>
+> 💭 **didn't work** — last corrected 2026-02-20. Recall: after "didn't", use the base form
 
 ### Session tracking
 
@@ -250,6 +268,16 @@ The plugin tracks your patterns over time using dual memory files stored globall
 
 Progress persists across all projects. Run `/claude-language-coach:setup` to set this up automatically. Templates available for all 8 languages.
 
+Run `/claude-language-coach:progress` for a full longitudinal report. The report is read-only analytics and covers:
+
+- **Overview** — time learning, sessions across projects, correction and vocabulary totals
+- **Pattern analysis** — active and resolved patterns ranked by persistence, grouped by type
+- **SRS status** — due and upcoming reviews, health metrics (ease factors, interval range)
+- **Vocabulary** — all acquired terms with acquisition rate per session
+- **Session timeline** — recent sessions with activity streaks and frequency
+- **Insights** — 3-5 actionable observations based on your data (weakest areas, native interference, SRS trajectory)
+- **Cross-language summary** — side-by-side comparison when using `/progress all`
+
 ## Design principles
 
 1. **Task first** — You're here to code, not to take a language class
@@ -261,7 +289,7 @@ Progress persists across all projects. Run `/claude-language-coach:setup` to set
 
 ## Contributing
 
-Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the step-by-step guide.
+Contributions welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for the step-by-step guide and [KNOWN-ISSUES.md](KNOWN-ISSUES.md) for current limitations and testing gaps.
 
 Areas that could use help:
 - Pronunciation tables for non-pt-BR native speakers
